@@ -15,8 +15,9 @@ public class ParticleRenderer {
     private Particle particle;
     private ParticleOptions<? extends ParticleType> options;
 
+    @Deprecated(forRemoval = true)
     public void render() {
-        type.getType().render(location, options);
+        type.getType().render(location);
     }
 
     @ApiStatus.Experimental

@@ -3,9 +3,13 @@ package me.outspending.particleapi;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
-public interface CustomParticleType {
+import java.util.List;
 
-    void render(@NotNull Location startingLocation, @NotNull ParticleOptions<?> options);
+public interface CustomParticleType<T extends CustomParticleType<?>> {
 
+    void render(@NotNull Location startingLocation);
 
+    @NotNull ParticleOptions<T> getOptions();
+
+    @NotNull List<String> getRequiredOptions();
 }

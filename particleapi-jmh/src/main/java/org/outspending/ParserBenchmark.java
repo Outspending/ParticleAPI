@@ -7,7 +7,7 @@ import me.outspending.particleapi.annotations.Options;
 import me.outspending.particleapi.annotations.ParticleConstruct;
 
 @ParticleConstruct(type = ParticleType.CIRCLE, particle = Particle.GRADIENT)
-@Options(maxParticles = 10000)
+@Options(maxParticles = 10000, fromAngle = 0, toAngle = 360)
 public class ParserBenchmark extends ParticleRenderer {
 
     @Override

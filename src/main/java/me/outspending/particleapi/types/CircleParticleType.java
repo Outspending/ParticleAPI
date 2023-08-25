@@ -5,11 +5,24 @@ import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
-public class CircleParticleType implements CustomParticleType {
+import java.util.List;
+
+public class CircleParticleType implements CustomParticleType<CircleParticleType> {
 
     @Override
-    public void render(@NotNull Location startingLocation, @NotNull ParticleOptions<?> options) {
+    public void render(@NotNull Location startingLocation) {
+        ParticleOptions<CircleParticleType> options = getOptions();
 
+    }
+
+    @Override
+    public @NotNull ParticleOptions<CircleParticleType> getOptions() {
+        return null;
+    }
+
+    @Override
+    public @NotNull List<String> getRequiredOptions() {
+        return null;
     }
 
 }
