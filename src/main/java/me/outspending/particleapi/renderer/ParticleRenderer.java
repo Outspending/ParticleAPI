@@ -1,8 +1,10 @@
-package me.outspending.particleapi;
+package me.outspending.particleapi.renderer;
 
+import me.outspending.particleapi.Particle;
+import me.outspending.particleapi.ParticleOptions;
+import me.outspending.particleapi.ParticleType;
 import org.bukkit.Location;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 

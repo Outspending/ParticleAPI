@@ -1,7 +1,7 @@
 package org.outspending;
 
 import me.outspending.particleapi.Particle;
-import me.outspending.particleapi.ParticleRenderer;
+import me.outspending.particleapi.renderer.ParticleRenderer;
 import me.outspending.particleapi.ParticleType;
 import me.outspending.particleapi.annotations.Options;
 import me.outspending.particleapi.annotations.ParticleConstruct;
