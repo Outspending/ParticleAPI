@@ -20,10 +20,37 @@ import java.util.List;
  */
 public interface CustomParticleType<T extends CustomParticleType<?>> {
 
+    /**
+     * Renders a particle effect at the specified location.
+     * <p>
+     * This uses vectors to get all points to render an {@link CustomParticleType},
+     *
+     * @param startingLocation
+     * @since 1.0
+     */
     void render(@NotNull Location startingLocation);
 
+    /**
+     * Gets the options for the particle type.
+     * <p>
+     * This is used to define the required options for the particle type.
+     * And add new options if you'd like.
+     *
+     * @since 1.0
+     * @return
+     */
     @NotNull ParticleOptions<T> getOptions();
 
+    /**
+     * Gets the required options for the particle type.
+     * <p>
+     * This is used to define the required options for the particle type.
+     * If one of the required options is not present, the particle effect
+     * will not render. This is used to prevent errors from occurring.
+     *
+     * @since 1.0
+     * @return
+     */
     @NotNull List<String> getRequiredOptions();
 
 }

@@ -25,6 +25,10 @@ import java.util.List;
  */
 public class CylinderParticleType implements CustomParticleType<CylinderParticleType> {
 
+    private final ParticleOptions<CylinderParticleType> options = new ParticleOptions<CylinderParticleType>()
+            .setOption("radius", 1D)
+            .setOption("height", 1D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -32,12 +36,12 @@ public class CylinderParticleType implements CustomParticleType<CylinderParticle
 
     @Override
     public @NotNull ParticleOptions<CylinderParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

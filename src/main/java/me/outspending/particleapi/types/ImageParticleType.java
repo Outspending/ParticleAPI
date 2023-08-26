@@ -30,6 +30,15 @@ import java.util.List;
  */
 public class ImageParticleType implements CustomParticleType<ImageParticleType> {
 
+    private final ParticleOptions<ImageParticleType> options = new ParticleOptions<ImageParticleType>()
+            .setOption("image", "")
+            .setOption("width", 1D)
+            .setOption("height", 1D)
+            .setOption("rotationX", 0D)
+            .setOption("rotationY", 0D)
+            .setOption("rotationZ", 0D)
+            .setOption("pixelSize", 1);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -37,12 +46,12 @@ public class ImageParticleType implements CustomParticleType<ImageParticleType> 
 
     @Override
     public @NotNull ParticleOptions<ImageParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

@@ -3,7 +3,9 @@ package me.outspending.particleapi;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ParticleOptions<T> {
 
@@ -68,7 +70,13 @@ public class ParticleOptions<T> {
         return getStringOption(key, value).charAt(0);
     }
 
-    public void setOption(@NotNull String key, @NotNull Object value) {
+    @SuppressWarnings("unchecked")
+    public ParticleOptions<T> setOption(@NotNull String key, @NotNull Object value) {
         options.put(key, value);
+        return this;
     }
+
+        public List<String> getAllOptions() {
+            return new ArrayList<>(options.keySet());
+        }
 }

@@ -27,6 +27,12 @@ import java.util.List;
  */
 public class LineParticleType implements CustomParticleType<LineParticleType> {
 
+    private final ParticleOptions<LineParticleType> options = new ParticleOptions<LineParticleType>()
+            .setOption("length", 1D)
+            .setOption("rotationX", 0D)
+            .setOption("rotationY", 0D)
+            .setOption("rotationZ", 0D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -34,12 +40,12 @@ public class LineParticleType implements CustomParticleType<LineParticleType> {
 
     @Override
     public @NotNull ParticleOptions<LineParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

@@ -27,6 +27,12 @@ import java.util.List;
  */
 public class CubeParticleType implements CustomParticleType<CubeParticleType> {
 
+    private final ParticleOptions<CubeParticleType> options = new ParticleOptions<CubeParticleType>()
+            .setOption("size", 1D)
+            .setOption("rotationX", 0D)
+            .setOption("rotationY", 0D)
+            .setOption("rotationZ", 0D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -34,12 +40,12 @@ public class CubeParticleType implements CustomParticleType<CubeParticleType> {
 
     @Override
     public @NotNull ParticleOptions<CubeParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

@@ -2,6 +2,7 @@ package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
+import me.outspending.particleapi.TextFont;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * Required Particle Options:
  * <ul>
  *     <li>{@code text} ({@link String}) - The text to display</li>
- *     <li>{@code font} ({@link String}) - The font to use</li>
+ *     <li>{@code font} ({@link TextFont}) - The font to use</li>
  *     <li>{@code size} ({@link Integer}) - The size of the text</li>
  * </ul>
  *
@@ -26,6 +27,11 @@ import java.util.List;
  */
 public class TextParticleType implements CustomParticleType<TextParticleType> {
 
+    private final ParticleOptions<TextParticleType> options = new ParticleOptions<TextParticleType>()
+            .setOption("text", "Hello, world!")
+            .setOption("font", TextFont.MINECRAFT)
+            .setOption("size", 1);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -33,12 +39,12 @@ public class TextParticleType implements CustomParticleType<TextParticleType> {
 
     @Override
     public @NotNull ParticleOptions<TextParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

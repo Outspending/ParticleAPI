@@ -27,6 +27,12 @@ import java.util.List;
  */
 public class TriangleParticleType implements CustomParticleType<TriangleParticleType> {
 
+    private final ParticleOptions<TriangleParticleType> options = new ParticleOptions<TriangleParticleType>()
+            .setOption("radius", 1D)
+            .setOption("density", 1)
+            .setOption("height", 1D)
+            .setOption("rotation", 1D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -34,12 +40,12 @@ public class TriangleParticleType implements CustomParticleType<TriangleParticle
 
     @Override
     public @NotNull ParticleOptions<TriangleParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

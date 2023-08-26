@@ -25,6 +25,10 @@ import java.util.List;
  */
 public class HelixParticleType implements CustomParticleType<HelixParticleType> {
 
+    private final ParticleOptions<HelixParticleType> options = new ParticleOptions<HelixParticleType>()
+            .setOption("radius", 1D)
+            .setOption("height", 1D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -32,12 +36,12 @@ public class HelixParticleType implements CustomParticleType<HelixParticleType> 
 
     @Override
     public @NotNull ParticleOptions<HelixParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

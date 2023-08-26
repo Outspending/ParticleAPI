@@ -25,6 +25,9 @@ import java.util.List;
 
 public class CircleParticleType implements CustomParticleType<CircleParticleType> {
 
+    private final ParticleOptions<CircleParticleType> options = new ParticleOptions<CircleParticleType>()
+            .setOption("radius", 1D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
         ParticleOptions<CircleParticleType> options = getOptions();
@@ -33,12 +36,12 @@ public class CircleParticleType implements CustomParticleType<CircleParticleType
 
     @Override
     public @NotNull ParticleOptions<CircleParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

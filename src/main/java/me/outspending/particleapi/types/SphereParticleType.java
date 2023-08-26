@@ -25,6 +25,10 @@ import java.util.List;
  */
 public class SphereParticleType implements CustomParticleType<SphereParticleType> {
 
+    private final ParticleOptions<SphereParticleType> options = new ParticleOptions<SphereParticleType>()
+            .setOption("radius", 1D)
+            .setOption("density", 1);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -32,12 +36,12 @@ public class SphereParticleType implements CustomParticleType<SphereParticleType
 
     @Override
     public @NotNull ParticleOptions<SphereParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }

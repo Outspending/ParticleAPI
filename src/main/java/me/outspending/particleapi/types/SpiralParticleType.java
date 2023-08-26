@@ -27,6 +27,12 @@ import java.util.List;
  */
 public class SpiralParticleType implements CustomParticleType<SpiralParticleType> {
 
+    private final ParticleOptions<SpiralParticleType> options = new ParticleOptions<SpiralParticleType>()
+            .setOption("radius", 1D)
+            .setOption("density", 1)
+            .setOption("height", 1D)
+            .setOption("rotation", 1D);
+
     @Override
     public void render(@NotNull Location startingLocation) {
 
@@ -34,12 +40,12 @@ public class SpiralParticleType implements CustomParticleType<SpiralParticleType
 
     @Override
     public @NotNull ParticleOptions<SpiralParticleType> getOptions() {
-        return null;
+        return options;
     }
 
     @Override
     public @NotNull List<String> getRequiredOptions() {
-        return null;
+        return options.getAllOptions();
     }
 
 }
