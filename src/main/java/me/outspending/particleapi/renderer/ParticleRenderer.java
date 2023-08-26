@@ -1,8 +1,6 @@
 package me.outspending.particleapi.renderer;
 
-import me.outspending.particleapi.Particle;
-import me.outspending.particleapi.ParticleOptions;
-import me.outspending.particleapi.ParticleType;
+import me.outspending.particleapi.*;
 import org.bukkit.Location;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -15,17 +13,18 @@ import java.util.concurrent.CompletableFuture;
  *
  * @since 1.0
  */
-public class ParticleRenderer {
+public abstract class ParticleRenderer {
 
     private Location location;
     private ParticleType type;
     private Particle particle;
-    private ParticleOptions<? extends ParticleType> options;
+    private ParticleOptions<? extends CustomParticleType<?>> options;
 
     /**
      * This is deprecated and will be removed in the future.
      * This has been moved to {@link Renderer} class.
      *
+     * @since 1.0
      * @deprecated This is deprecated and will be removed in the future.
      */
     @Deprecated(forRemoval = true)
@@ -37,8 +36,9 @@ public class ParticleRenderer {
      * This is deprecated and will be removed in the future.
      * This has been moved to {@link Renderer} class.
      *
+     * @since 1.0
      * @deprecated This is deprecated and will be removed in the future.
-     * @return
+     * @return CompletableFuture
      */
     @Deprecated(forRemoval = true)
     public CompletableFuture<Void> renderAsync() {
@@ -46,9 +46,19 @@ public class ParticleRenderer {
     }
 
     /**
+     * This is required to be implemented by all classes that extend this class.
+     * This is used to render the particle.
+     *
+     * @since 1.0
+     * @return ParticleOptions
+     */
+    public abstract ParticleOptions<? extends CustomParticleType<?>> getOptions();
+
+    /**
      * Gets called when each particle is rendered. This can be used to modify how the particle is rendered / get current particle.
      * This can cause performance issues if used incorrectly, and can cause errors.
      *
+     * @since 1.0
      * @see Renderer
      */
     public void onRender() {};
@@ -58,6 +68,7 @@ public class ParticleRenderer {
      * and the {@link Particle} that is being rendered. This can be used to modify the {@link ParticleOptions} or the
      * {@link Particle} before the render begins.
      *
+     * @since 1.0
      * @see Renderer
      */
     public void onRenderStart() {};
@@ -67,6 +78,7 @@ public class ParticleRenderer {
      * and the {@link Particle} that has been rendered. You cannot modify the {@link ParticleOptions} or the
      * {@link Particle} at this point.
      *
+     * @since 1.0
      * @see Renderer
      */
     public void onRenderEnd() {};

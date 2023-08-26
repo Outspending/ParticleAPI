@@ -13,5 +13,5 @@ import me.outspending.particleapi.renderer.Renderer;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public final class ParticleAPI  {
+public final class ParticleAPI {
 }
