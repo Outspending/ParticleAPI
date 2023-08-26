@@ -4,6 +4,7 @@ import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import me.outspending.particleapi.TextFont;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -32,9 +33,10 @@ public class TextParticleType implements CustomParticleType<TextParticleType> {
             .setOption("font", TextFont.MINECRAFT)
             .setOption("size", 1);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
-
+    public List<Vector> render(@NotNull Location startingLocation) {
+        return null;
     }
 
     @Override

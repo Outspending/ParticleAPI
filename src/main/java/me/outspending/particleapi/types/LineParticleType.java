@@ -3,9 +3,12 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as a line.
@@ -33,9 +36,25 @@ public class LineParticleType implements CustomParticleType<LineParticleType> {
             .setOption("rotationY", 0D)
             .setOption("rotationZ", 0D);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
+    public List<Vector> render(@NotNull Location startingLocation) {
+        double length = options.getDoubleOption("length");
+        double rotationX = options.getDoubleOption("rotationX");
+        double rotationY = options.getDoubleOption("rotationY");
+        double rotationZ = options.getDoubleOption("rotationZ");
 
+        List<Vector> points = new ArrayList<>();
+        Vector direction = new Vector(0, 0, 1).rotateAroundAxis(new Vector(1, 0, 0), rotationX)
+                .rotateAroundAxis(new Vector(0, 1, 0), rotationY)
+                .rotateAroundAxis(new Vector(0, 0, 1), rotationZ);
+
+        for (double t = 0; t <= length; t += 0.1) {
+            Vector point = direction.clone().multiply(t).add(startingLocation.toVector());
+            points.add(point);
+        }
+
+        return points;
     }
 
     @Override

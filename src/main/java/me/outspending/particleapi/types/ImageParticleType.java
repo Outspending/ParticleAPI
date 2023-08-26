@@ -3,9 +3,11 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as an image.
@@ -39,9 +41,10 @@ public class ImageParticleType implements CustomParticleType<ImageParticleType> 
             .setOption("rotationZ", 0D)
             .setOption("pixelSize", 1);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
-
+    public List<Vector> render(@NotNull Location startingLocation) {
+        return null;
     }
 
     @Override

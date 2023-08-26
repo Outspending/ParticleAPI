@@ -3,9 +3,12 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as a helix.
@@ -17,6 +20,8 @@ import java.util.List;
  * <ul>
  *     <li>{@code radius} ({@link Double}) - The radius of the helix</li>
  *     <li>{@code height} ({@link Double}) - The height of the helix</li>
+ *     <li>{@code density} ({@link Integer}) - The density of the helix</li>
+ *     <li>{@code hollow} ({@link Boolean}) - Whether or not the helix is hollow</li>
  * </ul>
  *
  * @see CustomParticleType
@@ -27,11 +32,30 @@ public class HelixParticleType implements CustomParticleType<HelixParticleType> 
 
     private final ParticleOptions<HelixParticleType> options = new ParticleOptions<HelixParticleType>()
             .setOption("radius", 1D)
-            .setOption("height", 1D);
+            .setOption("height", 1D)
+            .setOption("density", 1)
+            .setOption("hollow", false);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
+    public List<Vector> render(@NotNull Location startingLocation) {
+        double radius = options.getDoubleOption("radius");
+        double height = options.getDoubleOption("height");
+        int density = options.getIntegerOption("density");
+        boolean hollow = options.getBooleanOption("hollow");
 
+        List<Vector> points = new ArrayList<>();
+
+        for (int i = 0; i <= 360 * density; i++) {
+            double angle = Math.toRadians(i / (double) density);
+            double x = radius * Math.cos(angle);
+            double z = radius * Math.sin(angle);
+
+            double y = (hollow ? height / 2 : 0) + angle * height / (2 * Math.PI);
+            points.add(startingLocation.clone().add(x, y, z).toVector());
+        }
+
+        return points;
     }
 
     @Override

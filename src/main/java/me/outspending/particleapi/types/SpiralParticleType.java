@@ -3,8 +3,10 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +35,31 @@ public class SpiralParticleType implements CustomParticleType<SpiralParticleType
             .setOption("height", 1D)
             .setOption("rotation", 1D);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
+    public List<Vector> render(@NotNull Location startingLocation) {
+        List<Vector> points = new ArrayList<>();
 
+        double radius = options.getDoubleOption("radius");
+        int density = options.getIntegerOption("density");
+        double height = options.getDoubleOption("height");
+        double rotation = options.getDoubleOption("rotation");
+
+        double angleIncrement = Math.toRadians(360.0 / density);
+        double heightIncrement = height / density;
+
+        for (int i = 0; i < density; i++) {
+            double angle = i * angleIncrement;
+            double y = i * heightIncrement;
+
+            double x = Math.cos(angle + rotation) * radius;
+            double z = Math.sin(angle + rotation) * radius;
+
+            Vector particlePoint = new Vector(x, y, z).add(startingLocation.toVector());
+            points.add(particlePoint);
+        }
+
+        return points;
     }
 
     @Override

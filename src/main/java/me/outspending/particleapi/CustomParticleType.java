@@ -1,9 +1,11 @@
 package me.outspending.particleapi;
 
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a custom particle type.
@@ -28,7 +30,7 @@ public interface CustomParticleType<T extends CustomParticleType<?>> {
      * @param startingLocation
      * @since 1.0
      */
-    void render(@NotNull Location startingLocation);
+    @NotNull List<Vector> render(@NotNull Location startingLocation);
 
     /**
      * Gets the options for the particle type.

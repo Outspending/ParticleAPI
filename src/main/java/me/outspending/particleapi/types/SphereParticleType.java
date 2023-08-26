@@ -3,9 +3,12 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as a sphere.
@@ -17,6 +20,7 @@ import java.util.List;
  * <ul>
  *     <li>{@code radius} ({@link Double}) - The radius of the sphere</li>
  *     <li>{@code density} ({@link Integer}) - The density of the sphere</li>
+ *     <li>{@code hollow} ({@link Boolean}) - Whether or not the sphere is hollow</li>
  * </ul>
  *
  * @see CustomParticleType
@@ -27,11 +31,37 @@ public class SphereParticleType implements CustomParticleType<SphereParticleType
 
     private final ParticleOptions<SphereParticleType> options = new ParticleOptions<SphereParticleType>()
             .setOption("radius", 1D)
-            .setOption("density", 1);
+            .setOption("density", 1)
+            .setOption("hollow", false);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
+    public List<Vector> render(@NotNull Location startingLocation) {
+        List<Vector> particlePoints = new ArrayList<>();
 
+        double radius = options.getDoubleOption("radius");
+        int density = options.getIntegerOption("density");
+        boolean hollow = options.getBooleanOption("hollow");
+
+        int points = (int) (4 * Math.PI * radius * radius * density);
+        double phiIncrement = Math.PI * (3 - Math.sqrt(5));
+
+        for (int i = 0; i < points; i++) {
+            double y = 1 - (i / (double) (points - 1)) * 2;
+            double radiusAtY = Math.sqrt(1 - y * y) * radius;
+
+            double theta = i * phiIncrement;
+
+            double x = Math.cos(theta) * radiusAtY;
+            double z = Math.sin(theta) * radiusAtY;
+
+            if (hollow || y > 0) {
+                Vector particlePoint = new Vector(x, y * radius, z).add(startingLocation.toVector());
+                particlePoints.add(particlePoint);
+            }
+        }
+
+        return particlePoints;
     }
 
     @Override

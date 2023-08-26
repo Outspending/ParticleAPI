@@ -3,8 +3,10 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +35,26 @@ public class WaveParticleType implements CustomParticleType<WaveParticleType> {
             .setOption("height", 1D)
             .setOption("rotation", 1D);
 
+    @NotNull
     @Override
-    public void render(@NotNull Location startingLocation) {
-        // Implementation of the rendering logic
+    public List<Vector> render(@NotNull Location startingLocation) {
+        List<Vector> points = new ArrayList<>();
+
+        double radius = options.getDoubleOption("radius");
+        int density = options.getIntegerOption("density");
+        double height = options.getDoubleOption("height");
+        double rotation = options.getDoubleOption("rotation");
+
+        for (int i = 0; i < density; i++) {
+            double angle = (2 * Math.PI * i) / density;
+            double x = radius * Math.cos(angle);
+            double z = radius * Math.sin(angle);
+
+            Vector point = new Vector(x, height, z);
+            points.add(point);
+        }
+
+        return points;
     }
 
     @Override
