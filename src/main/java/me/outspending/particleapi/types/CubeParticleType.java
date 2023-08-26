@@ -7,11 +7,34 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class CubeParticleType implements CustomParticleType {
+/**
+ * Represents a particle type that renders as a cube.
+ * <p>
+ * This particle type is used in conjunction with the {@link me.outspending.particleapi.renderer.ParticleRenderer}
+ * to display a cube-shaped particle effect.
+ * <p>
+ * Required Particle Options:
+ * <ul>
+ *     <li>{@code size} ({@link Double}) - The size of the cube</li>
+ *     <li>{@code rotationX} ({@link Double}) - The rotation of the cube on the X axis</li>
+ *     <li>{@code rotationY} ({@link Double}) - The rotation of the cube on the Y axis</li>
+ *     <li>{@code rotationZ} ({@link Double}) - The rotation of the cube on the Z axis</li>
+ * </ul>
+ *
+ * @see CustomParticleType
+ * @see me.outspending.particleapi.renderer.ParticleRenderer
+ * @since 1.0
+ */
+public class CubeParticleType implements CustomParticleType<CubeParticleType> {
 
     @Override
-    public void render(@NotNull Location startingLocation, @NotNull ParticleOptions<?> options) {
+    public void render(@NotNull Location startingLocation) {
 
+    }
+
+    @Override
+    public @NotNull ParticleOptions<CubeParticleType> getOptions() {
+        return null;
     }
 
     @Override

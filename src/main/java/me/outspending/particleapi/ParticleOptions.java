@@ -17,6 +17,8 @@ public class ParticleOptions<T> {
         return options.containsKey(key);
     }
 
+
+
     public @Nullable Object getOption(@NotNull String key) {
         return options.get(key);
     }

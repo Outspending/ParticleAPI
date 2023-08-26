@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" />
     </modules>
   </component>
 </project>
