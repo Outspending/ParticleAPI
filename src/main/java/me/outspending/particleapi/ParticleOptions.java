@@ -71,8 +71,8 @@ public class ParticleOptions<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public ParticleOptions<T> setOption(@NotNull String key, @NotNull Object value) {
-        options.put(key, value);
+    public ParticleOptions<T> setOption(@NotNull ParticleOption key, @NotNull Object value) {
+        options.put(key.getOptionName(), value);
         return this;
     }
 

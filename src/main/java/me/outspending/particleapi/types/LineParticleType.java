@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -31,10 +32,10 @@ import java.util.concurrent.CompletableFuture;
 public class LineParticleType implements CustomParticleType<LineParticleType> {
 
     private final ParticleOptions<LineParticleType> options = new ParticleOptions<LineParticleType>()
-            .setOption("length", 1D)
-            .setOption("rotationX", 0D)
-            .setOption("rotationY", 0D)
-            .setOption("rotationZ", 0D);
+            .setOption(ParticleOption.LENGTH, 1D)
+            .setOption(ParticleOption.ROTATION_X, 0D)
+            .setOption(ParticleOption.ROTATION_Y, 0D)
+            .setOption(ParticleOption.ROTATION_Z, 0D);
 
     @NotNull
     @Override

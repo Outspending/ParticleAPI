@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -31,10 +32,10 @@ import java.util.concurrent.CompletableFuture;
 public class CylinderParticleType implements CustomParticleType<CylinderParticleType> {
 
     private final ParticleOptions<CylinderParticleType> options = new ParticleOptions<CylinderParticleType>()
-            .setOption("radius", 1D)
-            .setOption("height", 1D)
-            .setOption("density", 1)
-            .setOption("hollow", true);
+            .setOption(ParticleOption.RADIUS, 1D)
+            .setOption(ParticleOption.HEIGHT, 1D)
+            .setOption(ParticleOption.DENSITY, 1)
+            .setOption(ParticleOption.HOLLOW, true);
 
     @NotNull
     @Override

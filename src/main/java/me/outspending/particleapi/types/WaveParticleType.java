@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -30,10 +31,10 @@ import java.util.List;
 public class WaveParticleType implements CustomParticleType<WaveParticleType> {
 
     private final ParticleOptions<WaveParticleType> options = new ParticleOptions<WaveParticleType>()
-            .setOption("radius", 1D)
-            .setOption("density", 1)
-            .setOption("height", 1D)
-            .setOption("rotation", 1D);
+            .setOption(ParticleOption.RADIUS, 1D)
+            .setOption(ParticleOption.DENSITY, 1)
+            .setOption(ParticleOption.HEIGHT, 1D)
+            .setOption(ParticleOption.ROTATION, 1D);
 
     @NotNull
     @Override

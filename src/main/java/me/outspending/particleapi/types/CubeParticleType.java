@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -31,11 +32,11 @@ import java.util.List;
 public class CubeParticleType implements CustomParticleType<CubeParticleType> {
 
     private final ParticleOptions<CubeParticleType> options = new ParticleOptions<CubeParticleType>()
-            .setOption("size", 1D)
-            .setOption("rotationX", 0D)
-            .setOption("rotationY", 0D)
-            .setOption("rotationZ", 0D)
-            .setOption("density", 1);
+            .setOption(ParticleOption.SIZE, 1D)
+            .setOption(ParticleOption.ROTATION_X, 0D)
+            .setOption(ParticleOption.ROTATION_Y, 0D)
+            .setOption(ParticleOption.ROTATION_Z, 0D)
+            .setOption(ParticleOption.DENSITY, 1);
 
     @NotNull
     @Override

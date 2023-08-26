@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import me.outspending.particleapi.TextFont;
 import org.bukkit.Location;
@@ -29,9 +30,9 @@ import java.util.List;
 public class TextParticleType implements CustomParticleType<TextParticleType> {
 
     private final ParticleOptions<TextParticleType> options = new ParticleOptions<TextParticleType>()
-            .setOption("text", "Hello, world!")
-            .setOption("font", TextFont.MINECRAFT)
-            .setOption("size", 1);
+            .setOption(ParticleOption.TEXT, "Hello, world!")
+            .setOption(ParticleOption.FONT, TextFont.MINECRAFT)
+            .setOption(ParticleOption.SIZE, 1);
 
     @NotNull
     @Override

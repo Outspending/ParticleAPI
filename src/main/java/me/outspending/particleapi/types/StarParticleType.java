@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -29,9 +30,9 @@ import java.util.List;
 public class StarParticleType implements CustomParticleType<StarParticleType> {
 
     private final ParticleOptions<StarParticleType> options = new ParticleOptions<StarParticleType>()
-            .setOption("radius", 1D)
-            .setOption("density", 1)
-            .setOption("rotation", 1D);
+            .setOption(ParticleOption.RADIUS, 1D)
+            .setOption(ParticleOption.DENSITY, 1)
+            .setOption(ParticleOption.ROTATION, 1D);
 
     @NotNull
     @Override

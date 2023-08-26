@@ -1,6 +1,7 @@
 package me.outspending.particleapi.types;
 
 import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -30,8 +31,8 @@ import java.util.concurrent.CompletableFuture;
 public class CircleParticleType implements CustomParticleType<CircleParticleType> {
 
     private final ParticleOptions<CircleParticleType> options = new ParticleOptions<CircleParticleType>()
-            .setOption("radius", 1D)
-            .setOption("density", 1);
+            .setOption(ParticleOption.RADIUS, 1D)
+            .setOption(ParticleOption.DENSITY, 1);
 
     @NotNull
     @Override
