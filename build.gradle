@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'xyz.jpenilla.run-paper' version '2.1.0'
 }
@@ -7,28 +6,45 @@ plugins {
 group = 'me.outspending'
 version = '0.0.1'
 
-repositories {
-    mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
+allprojects {
+    apply plugin: 'java'
+
+    group = 'me.outspending'
+    version = '0.0.1'
+
+    repositories {
+        mavenCentral()
+        maven {
+            name = "papermc-repo"
+            url = "https://repo.papermc.io/repository/maven-public/"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/groups/public/"
+        }
     }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
+
+    dependencies {
+        compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
     }
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
+    implementation project(":particleapi-1.20_R1")
+    implementation project(":particleapi-1.19_R3")
+    implementation project(":particleapi-1.19_R2")
+    implementation project(":particleapi-1.19_R1")
+    implementation project(":particleapi-1.18_R2")
+    implementation project(":particleapi-1.18_R1")
+    implementation project(":particleapi-1.17_R1")
 }
 
 shadowJar {
     destinationDirectory = file("D:\\MC Server\\plugins")
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
 }
 
 tasks.runServer {

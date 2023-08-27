@@ -3,6 +3,22 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.17_R1/ParticleAPI.particleapi-1.17_R1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.17_R1/ParticleAPI.particleapi-1.17_R1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.17_R1/ParticleAPI.particleapi-1.17_R1.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.17_R1/ParticleAPI.particleapi-1.17_R1.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.18_R1/ParticleAPI.particleapi-1.18_R1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.18_R1/ParticleAPI.particleapi-1.18_R1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.18_R1/ParticleAPI.particleapi-1.18_R1.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.18_R1/ParticleAPI.particleapi-1.18_R1.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.18_R2/ParticleAPI.particleapi-1.18_R2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.18_R2/ParticleAPI.particleapi-1.18_R2.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.18_R2/ParticleAPI.particleapi-1.18_R2.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.18_R2/ParticleAPI.particleapi-1.18_R2.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R1/ParticleAPI.particleapi-1.19_R1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R1/ParticleAPI.particleapi-1.19_R1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R1/ParticleAPI.particleapi-1.19_R1.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R1/ParticleAPI.particleapi-1.19_R1.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R2/ParticleAPI.particleapi-1.19_R2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R2/ParticleAPI.particleapi-1.19_R2.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R2/ParticleAPI.particleapi-1.19_R2.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R2/ParticleAPI.particleapi-1.19_R2.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R3/ParticleAPI.particleapi-1.19_R3.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R3/ParticleAPI.particleapi-1.19_R3.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.19_R3/ParticleAPI.particleapi-1.19_R3.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.19_R3/ParticleAPI.particleapi-1.19_R3.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.20_R1/ParticleAPI.particleapi-1.20_R1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.20_R1/ParticleAPI.particleapi-1.20_R1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-1.20_R1/ParticleAPI.particleapi-1.20_R1.test.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-1.20_R1/ParticleAPI.particleapi-1.20_R1.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-examples/ParticleAPI.particleapi-examples.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-examples/ParticleAPI.particleapi-examples.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" />
     </modules>
   </component>

@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 public non-sealed class ParticleRenderer extends Renderer {
 
     private final CustomParticleType type;
-    private final Location startingLocation;
     private final ParticleOptions options;
 
     private final Consumer<CustomParticle> onRender;
@@ -30,16 +29,14 @@ public non-sealed class ParticleRenderer extends Renderer {
      *
      * @since 1.0
      * @param type
-     * @param startingLocation
      * @param options
      * @param onRender
      * @param onRenderComplete
      * @param onRenderFinish
      */
-    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull Location startingLocation, @NotNull ParticleOptions options,
-                            Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, Consumer<CustomParticle> onRender,
+                            Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
         this.type = type;
-        this.startingLocation = startingLocation;
         this.options = options;
         this.onRender = onRender;
         this.onRenderComplete = onRenderComplete;
@@ -54,8 +51,8 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param startingLocation
      * @param options
      */
-    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull Location startingLocation, @NotNull ParticleOptions options) {
-        this(type, startingLocation, options, null, null, null);
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options) {
+        this(type, options, null, null, null);
     }
 
     /**

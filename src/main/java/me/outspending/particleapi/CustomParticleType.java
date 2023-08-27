@@ -72,7 +72,6 @@ public interface CustomParticleType {
      * This is used to create custom particle types.
      *
      * @since 1.0
-     * @param <T>
      */
     class Builder {
 
@@ -112,7 +111,7 @@ public interface CustomParticleType {
         }
 
         public ParticleRenderer build() {
-            return new ParticleRenderer(type, null, options, onRender, onRenderStart, onRenderEnd);
+            return new ParticleRenderer(type, options, onRender, onRenderStart, onRenderEnd);
         }
     }
 

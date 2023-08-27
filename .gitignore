@@ -1,6 +1,15 @@
 # Misc files
 run
 
+# Gradle files (NMS)
+particleapi-1.17_R1/.gradle
+particleapi-1.18_R1/.gradle
+particleapi-1.18_R2/.gradle
+particleapi-1.19_R1/.gradle
+particleapi-1.19_R2/.gradle
+particleapi-1.19_R3/.gradle
+particleapi-1.20_R1/.gradle
+
 # Compiled class file
 *.class
 
