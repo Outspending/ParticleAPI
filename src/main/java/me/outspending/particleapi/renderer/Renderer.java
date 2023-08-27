@@ -1,8 +1,11 @@
 package me.outspending.particleapi.renderer;
 
+import me.outspending.particleapi.CustomParticle;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.CustomRenderer;
 import me.outspending.particleapi.ParticleOptions;
+import me.outspending.particleapi.particles.ParticleHandler;
+import me.outspending.particleapi.particles.ParticleHandlerImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -64,17 +67,15 @@ public sealed class Renderer permits ParticleRenderer {
      * @since 1.0
      * @param location
      * @param type
-     * @param options
+     * @param particle
      */
-    public void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull ParticleOptions options) {
-        // TODO: Remove Temp particle system and replace it with the custom particle system.
+    public void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
         List<Vector> points = getAllPoints(location, type);
-
-        Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLACK, 1);
+        ParticleHandler handler = ParticleHandler.of();
 
         for (Vector point : points) {
             Location loc = location.clone().add(point);
-            loc.getWorld().spawnParticle(Particle.REDSTONE, loc, 1, 0, 0, 0, 1, dustOptions);
+            handler.sendParticle(loc, particle);
         }
     }
 

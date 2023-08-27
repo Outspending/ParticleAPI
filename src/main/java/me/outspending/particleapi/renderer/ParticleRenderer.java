@@ -19,6 +19,7 @@ public non-sealed class ParticleRenderer extends Renderer {
 
     private final CustomParticleType type;
     private final ParticleOptions options;
+    private final CustomParticle particle;
 
     private final Consumer<CustomParticle> onRender;
     private final Consumer<CustomParticle> onRenderComplete;
@@ -34,10 +35,11 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param onRenderComplete
      * @param onRenderFinish
      */
-    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, Consumer<CustomParticle> onRender,
-                            Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, CustomParticle particle,
+                            Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
         this.type = type;
         this.options = options;
+        this.particle = particle;
         this.onRender = onRender;
         this.onRenderComplete = onRenderComplete;
         this.onRenderFinish = onRenderFinish;
@@ -50,8 +52,8 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param type
      * @param options
      */
-    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options) {
-        this(type, options, null, null, null);
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, @NotNull CustomParticle particle) {
+        this(type, options, particle, null, null, null);
     }
 
     /**
@@ -64,7 +66,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see Renderer
      */
     public void render(Location location) {
-        renderType(location, type, options);
+        renderType(location, type, particle);
     }
 
     /**
@@ -77,7 +79,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      */
     @Deprecated(forRemoval = true)
     public CompletableFuture<Void> renderAsync(Location location) {
-        return CompletableFuture.runAsync(() -> renderType(location, type, options));
+        return CompletableFuture.runAsync(() -> renderType(location, type, particle));
     }
 
 }

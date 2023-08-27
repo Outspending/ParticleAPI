@@ -79,7 +79,7 @@ public interface CustomParticleType {
         private final ParticleOptions options;
         private final CustomParticleType type;
 
-        private ParticleType particleType;
+        private CustomParticle particle;
         private Consumer<CustomParticle> onRender;
         private Consumer<CustomParticle> onRenderStart;
         private Consumer<CustomParticle> onRenderEnd;
@@ -97,8 +97,8 @@ public interface CustomParticleType {
             return this;
         }
 
-        public Builder particleType(@NotNull ParticleType particleType) {
-            this.particleType = particleType;
+        public Builder particleType(@NotNull CustomParticle particle) {
+            this.particle = particle;
             return this;
         }
 
@@ -118,9 +118,9 @@ public interface CustomParticleType {
         }
 
         public ParticleRenderer build() {
-            Preconditions.checkArgument(particleType != null, "Particle type cannot be null");
-            
-            return new ParticleRenderer(type, options, onRender, onRenderStart, onRenderEnd);
+            Preconditions.checkArgument(particle != null, "Particle type cannot be null");
+
+            return new ParticleRenderer(type, options, particle, onRender, onRenderStart, onRenderEnd);
         }
     }
 

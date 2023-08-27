@@ -21,13 +21,15 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         long start = System.currentTimeMillis();
-        NormalParticleType normal = CustomParticle.normal(Particle.CLOUD, true);
+        
         ParticleRenderer renderer = CustomParticleType.builder(new CircleParticleType())
+                .particleType(CustomParticle.normal(Particle.CLOUD, false))
                 .editOption(ParticleOption.RADIUS, 15)
                 .editOption(ParticleOption.DENSITY, 360)
                 .build();
 
         renderer.render(e.getBlock().getLocation());
+
         long end = System.currentTimeMillis();
         Bukkit.broadcastMessage("Rendered in " + (end - start) + "ms");
     }
