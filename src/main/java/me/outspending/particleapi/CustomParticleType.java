@@ -90,10 +90,7 @@ public interface CustomParticleType {
         }
 
         public Builder editOption(@NotNull ParticleOption option, @NotNull Object value) {
-            String optionName = option.getOptionName();
-            if (!options.getAllOptions().contains(optionName)) return this;
-
-            options.setOption(optionName, value);
+            options.editOption(option, value);
             return this;
         }
 
@@ -118,7 +115,7 @@ public interface CustomParticleType {
         }
 
         public ParticleRenderer build() {
-            Preconditions.checkArgument(particle != null, "Particle type cannot be null");
+            Preconditions.checkNotNull(particle, "Particle type cannot be null");
 
             return new ParticleRenderer(type, options, particle, onRender, onRenderStart, onRenderEnd);
         }

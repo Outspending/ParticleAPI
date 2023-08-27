@@ -36,7 +36,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @param type
      * @return List
      */
-    private List<Vector> getAllPoints(@NotNull Location startingLocation, @NotNull CustomParticleType type) {
+    protected List<Vector> getAllPoints(@NotNull Location startingLocation, @NotNull CustomParticleType type) {
         return type.render(startingLocation);
     }
 
@@ -51,7 +51,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @return boolean
      */
     @Deprecated(forRemoval = true)
-    private boolean hasAllRequiredOptions(@NotNull CustomParticleType type) {
+    protected boolean hasAllRequiredOptions(@NotNull CustomParticleType type) {
         ParticleOptions options = type.getOptions();
         for (String option : type.getRequiredOptions()) {
             if (!options.hasOption(option)) return false;
@@ -62,14 +62,14 @@ public sealed class Renderer permits ParticleRenderer {
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This will be rendered synchronously. To render asynchronously, use {@link #renderTypeAsync(Location, CustomParticleType, ParticleOptions)}.
+     * This will be rendered synchronously. To render asynchronously, use {@link #renderTypeAsync(Location, CustomParticleType, CustomParticle)}.
      *
      * @since 1.0
      * @param location
      * @param type
      * @param particle
      */
-    public void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
+    protected void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
         List<Vector> points = getAllPoints(location, type);
         ParticleHandler handler = ParticleHandler.of();
 
@@ -82,19 +82,19 @@ public sealed class Renderer permits ParticleRenderer {
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This will be rendered asynchronously. To render synchronously, use {@link #renderType(Location, CustomParticleType, ParticleOptions)}.
+     * This will be rendered asynchronously. To render synchronously, use {@link #renderType(Location, CustomParticleType, CustomParticle)}.
      * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
      * This feature is experimental and may not work as expected.
      *
      * @since 1.0
      * @param location
      * @param type
-     * @param options
+     * @param particle
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull ParticleOptions options) {
-        return CompletableFuture.runAsync(() -> renderType(location, type, options));
+    protected CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
+        return CompletableFuture.runAsync(() -> renderType(location, type, particle));
     }
 
     /**
@@ -103,13 +103,13 @@ public sealed class Renderer permits ParticleRenderer {
      * This will be rendered synchronously. To render asynchronously, use {@link #renderClassAsync(Location, Class)}.
      * <p>
      * This method will parse the class then execute it, this can cause issues, I recommend using
-     * {@link #renderType(Location, CustomParticleType, ParticleOptions)} instead. This method is only here for convenience.
+     * {@link #renderType(Location, CustomParticleType, CustomParticle)} instead. This method is only here for convenience.
      *
      * @since 1.0
      * @param location
      * @param clazz
      */
-    public <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz) {
+    protected <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz) {
 
     }
 
@@ -117,7 +117,7 @@ public sealed class Renderer permits ParticleRenderer {
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
      * This method will parse the class then execute it, this can cause issues, I recommend using
-     * {@link #renderType(Location, CustomParticleType, ParticleOptions)} instead. This method is only here for convenience.
+     * {@link #renderType(Location, CustomParticleType, CustomParticle)} instead. This method is only here for convenience.
      * <p>
      * This will be rendered asynchronously. To render synchronously, use {@link #renderClass(Location, Class)}.
      * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
@@ -129,7 +129,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz) {
+    protected <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz) {
         return CompletableFuture.runAsync(() -> renderClass(location, clazz));
     }
 
@@ -143,7 +143,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @param clazz
      * @param options
      */
-    public <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
+    protected <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
 
     }
 
@@ -161,7 +161,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
+    protected <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
         return CompletableFuture.runAsync(() -> renderClass(location, clazz, options));
     }
 
@@ -173,7 +173,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @since 1.0
      * @param renderer
      */
-    public void renderCustom(@NotNull CustomRenderer renderer) {
+    protected void renderCustom(@NotNull CustomRenderer renderer) {
 
     }
 
@@ -189,7 +189,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public CompletableFuture<Void> renderCustomAsync(@NotNull CustomRenderer renderer) {
+    protected CompletableFuture<Void> renderCustomAsync(@NotNull CustomRenderer renderer) {
         return CompletableFuture.runAsync(() -> renderCustom(renderer));
     }
 

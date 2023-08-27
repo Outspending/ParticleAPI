@@ -33,7 +33,7 @@ public class CircleParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
-            .setOption(ParticleOption.DENSITY, 1);
+            .setOption(ParticleOption.DENSITY, 360);
 
     @NotNull
     @Override

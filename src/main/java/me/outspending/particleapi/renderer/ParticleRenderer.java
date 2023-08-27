@@ -57,6 +57,18 @@ public non-sealed class ParticleRenderer extends Renderer {
     }
 
     /**
+     * Edits an option from {@link ParticleOptions}, this method edits an existing option,
+     * if this option doesn't exist this method will do nothing
+     *
+     * @since 1.0
+     * @param option
+     * @param value
+     */
+    public void editOption(@NotNull ParticleOption option, @NotNull Object value) {
+        options.editOption(option, value);
+    }
+
+    /**
      * Used to render a {@link CustomParticleType} synchronously.
      * <p>
      * This will render the particle effect synchronously.

@@ -44,6 +44,21 @@ public class ParticleOptions {
     }
 
     /**
+     * Edits an existing option, if the option doesn't exist
+     * this method will do nothing.
+     *
+     * @since 1.0
+     * @param key
+     * @param value
+     */
+    public void editOption(@NotNull ParticleOption key, @NotNull Object value) {
+        String optionName = key.getOptionName();
+        if (!hasOption(optionName)) return;
+
+        setOption(optionName, value);
+    }
+
+    /**
      * Gets an option for the particle type.
      *
      * @since 1.0
