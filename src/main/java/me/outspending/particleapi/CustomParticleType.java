@@ -1,5 +1,6 @@
 package me.outspending.particleapi;
 
+import com.google.common.base.Preconditions;
 import me.outspending.particleapi.renderer.ParticleRenderer;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
@@ -78,6 +79,7 @@ public interface CustomParticleType {
         private final ParticleOptions options;
         private final CustomParticleType type;
 
+        private ParticleType particleType;
         private Consumer<CustomParticle> onRender;
         private Consumer<CustomParticle> onRenderStart;
         private Consumer<CustomParticle> onRenderEnd;
@@ -92,6 +94,11 @@ public interface CustomParticleType {
             if (!options.getAllOptions().contains(optionName)) return this;
 
             options.setOption(optionName, value);
+            return this;
+        }
+
+        public Builder particleType(@NotNull ParticleType particleType) {
+            this.particleType = particleType;
             return this;
         }
 
@@ -111,6 +118,8 @@ public interface CustomParticleType {
         }
 
         public ParticleRenderer build() {
+            Preconditions.checkArgument(particleType != null, "Particle type cannot be null");
+            
             return new ParticleRenderer(type, options, onRender, onRenderStart, onRenderEnd);
         }
     }

@@ -48,7 +48,6 @@ public non-sealed class ParticleRenderer extends Renderer {
      *
      * @since 1.0
      * @param type
-     * @param startingLocation
      * @param options
      */
     public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options) {
