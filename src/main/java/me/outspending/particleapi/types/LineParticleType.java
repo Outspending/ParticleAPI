@@ -29,9 +29,9 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class LineParticleType implements CustomParticleType<LineParticleType> {
+public class LineParticleType implements CustomParticleType {
 
-    private final ParticleOptions<LineParticleType> options = new ParticleOptions<LineParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.LENGTH, 1D)
             .setOption(ParticleOption.ROTATION_X, 0D)
             .setOption(ParticleOption.ROTATION_Y, 0D)
@@ -59,7 +59,7 @@ public class LineParticleType implements CustomParticleType<LineParticleType> {
     }
 
     @Override
-    public @NotNull ParticleOptions<LineParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

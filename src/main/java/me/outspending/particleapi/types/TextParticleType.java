@@ -27,9 +27,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class TextParticleType implements CustomParticleType<TextParticleType> {
+public class TextParticleType implements CustomParticleType {
 
-    private final ParticleOptions<TextParticleType> options = new ParticleOptions<TextParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.TEXT, "Hello, world!")
             .setOption(ParticleOption.FONT, TextFont.MINECRAFT)
             .setOption(ParticleOption.SIZE, 1);
@@ -41,7 +41,7 @@ public class TextParticleType implements CustomParticleType<TextParticleType> {
     }
 
     @Override
-    public @NotNull ParticleOptions<TextParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

@@ -20,7 +20,7 @@ public class RenderParser {
         return clazz.isAnnotationPresent(annotation);
     }
 
-    private static <T extends CustomParticleType<? super T>> @Nullable ParticleOptions<T> parseOptions(@NotNull Class<? extends ParticleRenderer> clazz) {
+    private static <T extends CustomParticleType> @Nullable ParticleOptions parseOptions(@NotNull Class<? extends ParticleRenderer> clazz) {
         if (!hasAnnotation(clazz, Options.class)) return null;
 
         Options options = clazz.getAnnotation(Options.class);

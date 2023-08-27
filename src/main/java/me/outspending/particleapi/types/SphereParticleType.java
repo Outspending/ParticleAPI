@@ -28,9 +28,9 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class SphereParticleType implements CustomParticleType<SphereParticleType> {
+public class SphereParticleType implements CustomParticleType {
 
-    private final ParticleOptions<SphereParticleType> options = new ParticleOptions<SphereParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.HOLLOW, true);
@@ -66,7 +66,7 @@ public class SphereParticleType implements CustomParticleType<SphereParticleType
     }
 
     @Override
-    public @NotNull ParticleOptions<SphereParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

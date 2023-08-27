@@ -27,9 +27,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class StarParticleType implements CustomParticleType<StarParticleType> {
+public class StarParticleType implements CustomParticleType {
 
-    private final ParticleOptions<StarParticleType> options = new ParticleOptions<StarParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.ROTATION, 1D);
@@ -68,7 +68,7 @@ public class StarParticleType implements CustomParticleType<StarParticleType> {
     }
 
     @Override
-    public @NotNull ParticleOptions<StarParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

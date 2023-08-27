@@ -29,9 +29,9 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class CylinderParticleType implements CustomParticleType<CylinderParticleType> {
+public class CylinderParticleType implements CustomParticleType {
 
-    private final ParticleOptions<CylinderParticleType> options = new ParticleOptions<CylinderParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.HEIGHT, 1D)
             .setOption(ParticleOption.DENSITY, 1)
@@ -71,7 +71,7 @@ public class CylinderParticleType implements CustomParticleType<CylinderParticle
     }
 
     @Override
-    public @NotNull ParticleOptions<CylinderParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

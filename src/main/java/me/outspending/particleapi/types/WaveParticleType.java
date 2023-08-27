@@ -28,9 +28,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class WaveParticleType implements CustomParticleType<WaveParticleType> {
+public class WaveParticleType implements CustomParticleType {
 
-    private final ParticleOptions<WaveParticleType> options = new ParticleOptions<WaveParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.HEIGHT, 1D)
@@ -59,7 +59,7 @@ public class WaveParticleType implements CustomParticleType<WaveParticleType> {
     }
 
     @Override
-    public @NotNull ParticleOptions<WaveParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

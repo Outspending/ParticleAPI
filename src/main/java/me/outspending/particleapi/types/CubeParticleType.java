@@ -29,9 +29,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class CubeParticleType implements CustomParticleType<CubeParticleType> {
+public class CubeParticleType implements CustomParticleType {
 
-    private final ParticleOptions<CubeParticleType> options = new ParticleOptions<CubeParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.SIZE, 1D)
             .setOption(ParticleOption.ROTATION_X, 0D)
             .setOption(ParticleOption.ROTATION_Y, 0D)
@@ -60,7 +60,7 @@ public class CubeParticleType implements CustomParticleType<CubeParticleType> {
     }
 
     @Override
-    public @NotNull ParticleOptions<CubeParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

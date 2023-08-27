@@ -1,5 +1,6 @@
 package me.outspending.particleapi;
 
+import me.outspending.particleapi.renderer.ParticleRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,9 +15,8 @@ import java.util.List;
  *
  * @since 1.0
  * @see CustomParticleType
- * @param <T>
  */
-public class ParticleOptions<T extends CustomParticleType<?>> {
+public class ParticleOptions {
 
     private HashMap<String, Object> options = new HashMap<>();
 
@@ -170,9 +170,21 @@ public class ParticleOptions<T extends CustomParticleType<?>> {
      * @param value
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public ParticleOptions<T> setOption(@NotNull ParticleOption key, @NotNull Object value) {
+    public ParticleOptions setOption(@NotNull ParticleOption key, @NotNull Object value) {
         options.put(key.getOptionName(), value);
+        return this;
+    }
+
+    /**
+     * Sets an option for the particle type.
+     *
+     * @since 1.0
+     * @param key
+     * @param value
+     * @return
+     */
+    public ParticleOptions setOption(@NotNull String key, @NotNull Object value) {
+        options.put(key, value);
         return this;
     }
 
@@ -187,7 +199,7 @@ public class ParticleOptions<T extends CustomParticleType<?>> {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends CustomParticleType<? super T>> ParticleOptions<T> getDefaults(Class<T> clazz) {
-        return (ParticleOptions<T>) clazz.cast(null).getOptions();
+    public static ParticleOptions getDefaults(Class<? extends CustomParticleType> clazz) {
+        return clazz.cast(null).getOptions();
     }
 }

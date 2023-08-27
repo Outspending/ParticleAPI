@@ -29,9 +29,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class TriangleParticleType implements CustomParticleType<TriangleParticleType> {
+public class TriangleParticleType implements CustomParticleType {
 
-    private final ParticleOptions<TriangleParticleType> options = new ParticleOptions<TriangleParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.HEIGHT, 1D)
@@ -79,7 +79,7 @@ public class TriangleParticleType implements CustomParticleType<TriangleParticle
     }
 
     @Override
-    public @NotNull ParticleOptions<TriangleParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

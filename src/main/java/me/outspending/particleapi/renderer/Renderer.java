@@ -3,7 +3,10 @@ package me.outspending.particleapi.renderer;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.CustomRenderer;
 import me.outspending.particleapi.ParticleOptions;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
  *
  * @since 1.0
  */
-public final class Renderer {
+public sealed class Renderer permits ParticleRenderer {
 
     /**
      * Gets all points from a particle type using {@link CustomParticleType#render(Location)}.
@@ -30,7 +33,7 @@ public final class Renderer {
      * @param type
      * @return List
      */
-    private static List<Vector> getAllPoints(@NotNull Location startingLocation, @NotNull CustomParticleType<?> type) {
+    private List<Vector> getAllPoints(@NotNull Location startingLocation, @NotNull CustomParticleType type) {
         return type.render(startingLocation);
     }
 
@@ -43,11 +46,10 @@ public final class Renderer {
      * @since 1.0
      * @param type
      * @return boolean
-     * @param <T>
      */
     @Deprecated(forRemoval = true)
-    private static <T extends CustomParticleType<?>> boolean hasAllRequiredOptions(@NotNull CustomParticleType<T> type) {
-        ParticleOptions<T> options = type.getOptions();
+    private boolean hasAllRequiredOptions(@NotNull CustomParticleType type) {
+        ParticleOptions options = type.getOptions();
         for (String option : type.getRequiredOptions()) {
             if (!options.hasOption(option)) return false;
         }
@@ -64,12 +66,16 @@ public final class Renderer {
      * @param type
      * @param options
      */
-    public static void renderType(@NotNull Location location, @NotNull CustomParticleType<?> type, @NotNull ParticleOptions<?> options) {
-        if (!hasAllRequiredOptions(type)) return;
-
+    public void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull ParticleOptions options) {
+        // TODO: Remove Temp particle system and replace it with the custom particle system.
         List<Vector> points = getAllPoints(location, type);
-        for (Vector point : points)
-            type.render(location.add(point));
+
+        Particle.DustOptions dustOptions = new Particle.DustOptions(Color.BLACK, 1);
+
+        for (Vector point : points) {
+            Location loc = location.clone().add(point);
+            loc.getWorld().spawnParticle(Particle.REDSTONE, loc, 1, 0, 0, 0, 1, dustOptions);
+        }
     }
 
     /**
@@ -86,7 +92,7 @@ public final class Renderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public static CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType<?> type, @NotNull ParticleOptions<?> options) {
+    public CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull ParticleOptions options) {
         return CompletableFuture.runAsync(() -> renderType(location, type, options));
     }
 
@@ -102,7 +108,7 @@ public final class Renderer {
      * @param location
      * @param clazz
      */
-    public static <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz) {
+    public <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz) {
 
     }
 
@@ -122,7 +128,7 @@ public final class Renderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public static <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz) {
+    public <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz) {
         return CompletableFuture.runAsync(() -> renderClass(location, clazz));
     }
 
@@ -136,7 +142,7 @@ public final class Renderer {
      * @param clazz
      * @param options
      */
-    public static <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions<?> options) {
+    public <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
 
     }
 
@@ -154,7 +160,7 @@ public final class Renderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public static <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions<?> options) {
+    public <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
         return CompletableFuture.runAsync(() -> renderClass(location, clazz, options));
     }
 
@@ -166,7 +172,7 @@ public final class Renderer {
      * @since 1.0
      * @param renderer
      */
-    public static void renderCustom(@NotNull CustomRenderer renderer) {
+    public void renderCustom(@NotNull CustomRenderer renderer) {
 
     }
 
@@ -182,7 +188,7 @@ public final class Renderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    public static CompletableFuture<Void> renderCustomAsync(@NotNull CustomRenderer renderer) {
+    public CompletableFuture<Void> renderCustomAsync(@NotNull CustomRenderer renderer) {
         return CompletableFuture.runAsync(() -> renderCustom(renderer));
     }
 

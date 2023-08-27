@@ -28,9 +28,9 @@ import java.util.List;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class SpiralParticleType implements CustomParticleType<SpiralParticleType> {
+public class SpiralParticleType implements CustomParticleType {
 
-    private final ParticleOptions<SpiralParticleType> options = new ParticleOptions<SpiralParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.HEIGHT, 1D)
@@ -64,7 +64,7 @@ public class SpiralParticleType implements CustomParticleType<SpiralParticleType
     }
 
     @Override
-    public @NotNull ParticleOptions<SpiralParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

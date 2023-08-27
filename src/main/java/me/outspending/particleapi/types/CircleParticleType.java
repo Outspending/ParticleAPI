@@ -3,6 +3,7 @@ package me.outspending.particleapi.types;
 import me.outspending.particleapi.CustomParticleType;
 import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -28,9 +29,9 @@ import java.util.concurrent.CompletableFuture;
  * @since 1.0
  */
 
-public class CircleParticleType implements CustomParticleType<CircleParticleType> {
+public class CircleParticleType implements CustomParticleType {
 
-    private final ParticleOptions<CircleParticleType> options = new ParticleOptions<CircleParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1);
 
@@ -39,6 +40,7 @@ public class CircleParticleType implements CustomParticleType<CircleParticleType
     public List<Vector> render(@NotNull Location startingLocation) {
         double radius = options.getDoubleOption("radius");
         int density = options.getIntegerOption("density");
+
         List<Vector> particleOffsets = new ArrayList<>();
 
         for (int i = 0; i < density; i++) {
@@ -52,7 +54,7 @@ public class CircleParticleType implements CustomParticleType<CircleParticleType
     }
 
     @Override
-    public @NotNull ParticleOptions<CircleParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

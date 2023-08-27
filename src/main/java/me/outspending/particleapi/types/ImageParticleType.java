@@ -31,9 +31,9 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class ImageParticleType implements CustomParticleType<ImageParticleType> {
+public class ImageParticleType implements CustomParticleType {
 
-    private final ParticleOptions<ImageParticleType> options = new ParticleOptions<ImageParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.IMAGE, "")
             .setOption(ParticleOption.WIDTH, 1D)
             .setOption(ParticleOption.HEIGHT, 1D)
@@ -49,7 +49,7 @@ public class ImageParticleType implements CustomParticleType<ImageParticleType> 
     }
 
     @Override
-    public @NotNull ParticleOptions<ImageParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 

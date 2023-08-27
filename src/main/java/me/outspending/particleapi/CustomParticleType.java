@@ -1,11 +1,12 @@
 package me.outspending.particleapi;
 
+import me.outspending.particleapi.renderer.ParticleRenderer;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
  * Represents a custom particle type.
@@ -17,10 +18,20 @@ import java.util.concurrent.CompletableFuture;
  * define the required options for the particle effect. For example, a spiral particle
  * type would require the radius, density, height, and rotation options.
  *
- * @param <T>
  * @since 1.0
  */
-public interface CustomParticleType<T extends CustomParticleType<?>> {
+public interface CustomParticleType {
+
+    /**
+     * Constructs a new {@link Builder} for the specified {@link CustomParticleType}.
+     *
+     * @since 1.0
+     * @param type
+     * @return
+     */
+    static Builder builder(@NotNull CustomParticleType type) {
+        return new Builder(type);
+    }
 
     /**
      * Renders a particle effect at the specified location.
@@ -41,7 +52,7 @@ public interface CustomParticleType<T extends CustomParticleType<?>> {
      * @since 1.0
      * @return
      */
-    @NotNull ParticleOptions<T> getOptions();
+    @NotNull ParticleOptions getOptions();
 
     /**
      * Gets the required options for the particle type.
@@ -54,5 +65,55 @@ public interface CustomParticleType<T extends CustomParticleType<?>> {
      * @return
      */
     @NotNull List<String> getRequiredOptions();
+
+    /**
+     * Represents a builder for a custom particle type.
+     * <p>
+     * This is used to create custom particle types.
+     *
+     * @since 1.0
+     * @param <T>
+     */
+    class Builder {
+
+        private final ParticleOptions options;
+        private final CustomParticleType type;
+
+        private Consumer<CustomParticle> onRender;
+        private Consumer<CustomParticle> onRenderStart;
+        private Consumer<CustomParticle> onRenderEnd;
+
+        public Builder(@NotNull CustomParticleType type) {
+            this.type = type;
+            options = type.getOptions();
+        }
+
+        public Builder editOption(@NotNull ParticleOption option, @NotNull Object value) {
+            String optionName = option.getOptionName();
+            if (!options.getAllOptions().contains(optionName)) return this;
+
+            options.setOption(optionName, value);
+            return this;
+        }
+
+        public Builder onRender(@NotNull Consumer<CustomParticle> onRender) {
+            this.onRender = onRender;
+            return this;
+        }
+
+        public Builder onRenderStart(@NotNull Consumer<CustomParticle> onRenderStart) {
+            this.onRenderStart = onRenderStart;
+            return this;
+        }
+
+        public Builder onRenderEnd(@NotNull Consumer<CustomParticle> onRenderEnd) {
+            this.onRenderEnd = onRenderEnd;
+            return this;
+        }
+
+        public ParticleRenderer build() {
+            return new ParticleRenderer(type, null, options, onRender, onRenderStart, onRenderEnd);
+        }
+    }
 
 }

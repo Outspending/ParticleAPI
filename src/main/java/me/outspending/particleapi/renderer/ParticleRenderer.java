@@ -3,8 +3,10 @@ package me.outspending.particleapi.renderer;
 import me.outspending.particleapi.*;
 import org.bukkit.Location;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
  * Represents a particle renderer.
@@ -13,23 +15,60 @@ import java.util.concurrent.CompletableFuture;
  *
  * @since 1.0
  */
-public abstract class ParticleRenderer {
+public non-sealed class ParticleRenderer extends Renderer {
 
-    private Location location;
-    private ParticleType type;
-    private Particle particle;
-    private ParticleOptions<? extends CustomParticleType<?>> options;
+    private final CustomParticleType type;
+    private final Location startingLocation;
+    private final ParticleOptions options;
+
+    private final Consumer<CustomParticle> onRender;
+    private final Consumer<CustomParticle> onRenderComplete;
+    private final Consumer<CustomParticle> onRenderFinish;
 
     /**
-     * This is deprecated and will be removed in the future.
-     * This has been moved to {@link Renderer} class.
+     * Constructs a new {@link ParticleRenderer}.
      *
      * @since 1.0
-     * @deprecated This is deprecated and will be removed in the future.
+     * @param type
+     * @param startingLocation
+     * @param options
+     * @param onRender
+     * @param onRenderComplete
+     * @param onRenderFinish
      */
-    @Deprecated(forRemoval = true)
-    public void render() {
-        type.getType().render(location);
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull Location startingLocation, @NotNull ParticleOptions options,
+                            Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
+        this.type = type;
+        this.startingLocation = startingLocation;
+        this.options = options;
+        this.onRender = onRender;
+        this.onRenderComplete = onRenderComplete;
+        this.onRenderFinish = onRenderFinish;
+    }
+
+    /**
+     * Constructs a new {@link ParticleRenderer}.
+     *
+     * @since 1.0
+     * @param type
+     * @param startingLocation
+     * @param options
+     */
+    public ParticleRenderer(@NotNull CustomParticleType type, @NotNull Location startingLocation, @NotNull ParticleOptions options) {
+        this(type, startingLocation, options, null, null, null);
+    }
+
+    /**
+     * Used to render a {@link CustomParticleType} synchronously.
+     * <p>
+     * This will render the particle effect synchronously.
+     *
+     * @since 1.0
+     * @see CustomParticleType
+     * @see Renderer
+     */
+    public void render(Location location) {
+        renderType(location, type, options);
     }
 
     /**
@@ -41,45 +80,8 @@ public abstract class ParticleRenderer {
      * @return CompletableFuture
      */
     @Deprecated(forRemoval = true)
-    public CompletableFuture<Void> renderAsync() {
-        return CompletableFuture.runAsync(this::render);
+    public CompletableFuture<Void> renderAsync(Location location) {
+        return CompletableFuture.runAsync(() -> renderType(location, type, options));
     }
 
-    /**
-     * This is required to be implemented by all classes that extend this class.
-     * This is used to render the particle.
-     *
-     * @since 1.0
-     * @return ParticleOptions
-     */
-    public abstract ParticleOptions<? extends CustomParticleType<?>> getOptions();
-
-    /**
-     * Gets called when each particle is rendered. This can be used to modify how the particle is rendered / get current particle.
-     * This can cause performance issues if used incorrectly, and can cause errors.
-     *
-     * @since 1.0
-     * @see Renderer
-     */
-    public void onRender() {};
-
-    /**
-     * Is called when the render of the {@link ParticleType} begins. Here you can retrieve the {@link ParticleOptions}
-     * and the {@link Particle} that is being rendered. This can be used to modify the {@link ParticleOptions} or the
-     * {@link Particle} before the render begins.
-     *
-     * @since 1.0
-     * @see Renderer
-     */
-    public void onRenderStart() {};
-
-    /**
-     * Is called when the render of the {@link ParticleType} ends. Here you can retrieve the {@link ParticleOptions}
-     * and the {@link Particle} that has been rendered. You cannot modify the {@link ParticleOptions} or the
-     * {@link Particle} at this point.
-     *
-     * @since 1.0
-     * @see Renderer
-     */
-    public void onRenderEnd() {};
 }

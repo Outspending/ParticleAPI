@@ -1,0 +1,4 @@
+name: ParticleAPI
+version: '${version}'
+main: me.outspending.particleapi.Main
+api-version: '1.20'

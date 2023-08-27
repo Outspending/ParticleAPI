@@ -29,9 +29,9 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
-public class HelixParticleType implements CustomParticleType<HelixParticleType> {
+public class HelixParticleType implements CustomParticleType {
 
-    private final ParticleOptions<HelixParticleType> options = new ParticleOptions<HelixParticleType>()
+    private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.HEIGHT, 1D)
             .setOption(ParticleOption.DENSITY, 1)
@@ -60,7 +60,7 @@ public class HelixParticleType implements CustomParticleType<HelixParticleType> 
     }
 
     @Override
-    public @NotNull ParticleOptions<HelixParticleType> getOptions() {
+    public @NotNull ParticleOptions getOptions() {
         return options;
     }
 
