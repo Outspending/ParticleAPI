@@ -11,6 +11,7 @@ import me.outspending.particleapi.particles.TransitionParticleType;
  * @see me.outspending.particleapi.renderer.Renderer
  * @since 1.0
  */
+@Deprecated
 public enum Particle {
 
     /**
@@ -21,7 +22,7 @@ public enum Particle {
      *
      * @since 1.0
      */
-    NORMAL(new NormalParticleType()),
+    NORMAL(new NormalParticleType(null)),
 
     /**
      * Represents a transition particle type.
@@ -30,7 +31,7 @@ public enum Particle {
      *
      * @since 1.0
      */
-    TRANSITION(new TransitionParticleType()),
+    TRANSITION(new TransitionParticleType(false)),
 
     /**
      * Represents a gradient particle type.

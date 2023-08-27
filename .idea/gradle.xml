@@ -8,13 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/particleapi-1.17_R1" />
-            <option value="$PROJECT_DIR$/particleapi-1.18_R1" />
-            <option value="$PROJECT_DIR$/particleapi-1.18_R2" />
-            <option value="$PROJECT_DIR$/particleapi-1.19_R1" />
-            <option value="$PROJECT_DIR$/particleapi-1.19_R2" />
-            <option value="$PROJECT_DIR$/particleapi-1.19_R3" />
-            <option value="$PROJECT_DIR$/particleapi-1.20_R1" />
             <option value="$PROJECT_DIR$/particleapi-examples" />
             <option value="$PROJECT_DIR$/particleapi-jmh" />
           </set>

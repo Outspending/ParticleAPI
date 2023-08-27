@@ -2,6 +2,8 @@ package me.outspending.particleapi.particles;
 
 import me.outspending.particleapi.CustomParticle;
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,9 +17,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NormalParticleType implements CustomParticle {
 
-    @Override
-    public void spawn(@NotNull Location location) {
+    private final Particle particle;
+    private final boolean force;
 
+    public NormalParticleType(Particle particle, boolean force) {
+        this.particle = particle;
+        this.force = force;
+    }
+
+    public NormalParticleType(Particle particle) {
+        this(particle, false);
+    }
+
+    public Particle getParticle() {
+        return particle;
+    }
+
+    @Override
+    public void spawn(@NotNull Location location, @NotNull Player player) {
+        player.spawnParticle(particle, location, 1, 0, 0, 0, (this.force ? 1 : 0), null);
     }
 
 }

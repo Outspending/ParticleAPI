@@ -2,6 +2,7 @@ package me.outspending.particleapi.particles;
 
 import me.outspending.particleapi.CustomParticle;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class GradientParticleType implements CustomParticle {
 
     @Override
-    public void spawn(@NotNull Location location) {
+    public void spawn(@NotNull Location location, @NotNull Player player) {
 
     }
 

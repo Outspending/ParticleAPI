@@ -33,16 +33,6 @@ allprojects {
     }
 }
 
-dependencies {
-    implementation project(":particleapi-1.20_R1")
-    implementation project(":particleapi-1.19_R3")
-    implementation project(":particleapi-1.19_R2")
-    implementation project(":particleapi-1.19_R1")
-    implementation project(":particleapi-1.18_R2")
-    implementation project(":particleapi-1.18_R1")
-    implementation project(":particleapi-1.17_R1")
-}
-
 shadowJar {
     destinationDirectory = file("D:\\MC Server\\plugins")
 }
