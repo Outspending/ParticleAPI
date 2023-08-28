@@ -1,7 +1,9 @@
 package me.outspending.particleapi;
 
+import me.outspending.particleapi.particles.DustParticleType;
 import me.outspending.particleapi.particles.NormalParticleType;
 import me.outspending.particleapi.particles.TransitionParticleType;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
@@ -28,6 +30,19 @@ public interface CustomParticle {
     static NormalParticleType normal(@NotNull Particle particle, boolean force) {
         return new NormalParticleType(particle, force);
     }
+
+    /**
+     * Returns a new instance of {@link DustParticleType}.
+     *
+     * @since 1.0
+     * @param color
+     * @param size
+     * @return
+     */
+    static DustParticleType dust(Color color, int size) {
+        return new DustParticleType(color, size);
+    }
+
 
     /**
      * Returns a new instance of {@link TransitionParticleType}.

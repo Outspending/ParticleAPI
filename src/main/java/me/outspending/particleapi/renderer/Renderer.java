@@ -29,6 +29,11 @@ import java.util.concurrent.CompletableFuture;
 public sealed class Renderer permits ParticleRenderer {
 
     /**
+     * The particle handler. Re
+     */
+    protected static final ParticleHandler handler = ParticleHandler.of();
+
+    /**
      * Gets all points from a particle type using {@link CustomParticleType#render(Location)}.
      *
      * @since 1.0
@@ -71,7 +76,6 @@ public sealed class Renderer permits ParticleRenderer {
      */
     protected void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
         List<Vector> points = getAllPoints(location, type);
-        ParticleHandler handler = ParticleHandler.of();
 
         for (Vector point : points) {
             Location loc = location.clone().add(point);

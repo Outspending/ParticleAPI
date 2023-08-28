@@ -3,8 +3,10 @@ package me.outspending.particleapi;
 import me.outspending.particleapi.particles.NormalParticleType;
 import me.outspending.particleapi.renderer.ParticleRenderer;
 import me.outspending.particleapi.types.CircleParticleType;
+import me.outspending.particleapi.types.CylinderParticleType;
 import me.outspending.particleapi.types.SphereParticleType;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.event.EventHandler;
@@ -22,28 +24,30 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        long start = System.currentTimeMillis();
-
-        ParticleRenderer renderer = CustomParticleType.builder(new CircleParticleType())
-                .particleType(CustomParticle.normal(Particle.CLOUD, false))
+        ParticleRenderer renderer = CustomParticleType.builder(new SphereParticleType())
+                .particleType(CustomParticle.dust(Color.BLUE, 1))
+                .editOption(ParticleOption.RADIUS, 5D)
+                .editOption(ParticleOption.DENSITY, 200)
                 .build();
 
-        new BukkitRunnable() {
+        long start = System.nanoTime();
+        renderer.renderAsync(e.getBlock().getLocation());
+        Bukkit.broadcastMessage("Rendered in " + (System.nanoTime() - start) + "ns");
 
-            private Location location = e.getBlock().getLocation();
-            private double number = 0;
-
-            @Override
-            public void run() {
-                renderer.editOption(ParticleOption.RADIUS, number);
-                renderer.renderAsync(location);
-
-                if (number >= 10) cancel();
-                number += 0.1;
-            }
-        }.runTaskTimer(this, 1, 1);
-
-        long end = System.currentTimeMillis();
-        Bukkit.broadcastMessage("Rendered in " + (end - start) + "ms");
+//        new BukkitRunnable() {
+//
+//            private Location location = e.getBlock().getLocation();
+//            private int number = 0;
+//
+//            @Override
+//            public void run() {
+//                long start = System.nanoTime();
+//                renderer.render(location);
+//                Bukkit.broadcastMessage("Rendered in " + (System.nanoTime() - start) + "ns");
+//
+//                if (number >= 10) cancel();
+//                number++;
+//            }
+//        }.runTaskTimer(this, 1, 1);
     }
 }

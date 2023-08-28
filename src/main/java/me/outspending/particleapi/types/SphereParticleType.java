@@ -56,10 +56,7 @@ public class SphereParticleType implements CustomParticleType {
             double x = Math.cos(theta) * radiusAtY;
             double z = Math.sin(theta) * radiusAtY;
 
-            if (hollow || y > 0) {
-                Vector particlePoint = new Vector(x, y * radius, z).add(startingLocation.toVector());
-                particlePoints.add(particlePoint);
-            }
+            if (hollow || y > 0) particlePoints.add(new Vector(x, y * radius, z));
         }
 
         return particlePoints;
