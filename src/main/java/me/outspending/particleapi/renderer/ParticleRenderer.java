@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
@@ -93,6 +94,32 @@ public non-sealed class ParticleRenderer extends Renderer {
      */
     public CompletableFuture<Void> renderAsync(@NotNull Location location) {
         return renderTypeAsync(location, type, particle, onRender, onRenderStart, onRenderFinish);
+    }
+
+    /**
+     * Renders a {@link CustomParticleType} synchronously.
+     * <p>
+     * Will render the particle effect for a specified amount of time.
+     *
+     * @since 1.0
+     * @see CustomParticleType
+     * @see Renderer
+     */
+    public void renderTimed(@NotNull Location location, int delay, @NotNull TimeUnit time) {
+        renderTimed(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
+    }
+
+    /**
+     * Renders a {@link CustomParticleType} asynchronously.
+     * <p>
+     * Will render the particle effect for a specified amount of time.
+     *
+     * @since 1.0
+     * @see CustomParticleType
+     * @see Renderer
+     */
+    public void renderTimedAsync(@NotNull Location location, int delay, @NotNull TimeUnit time) {
+        renderTimedAsync(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
     }
 
     /**

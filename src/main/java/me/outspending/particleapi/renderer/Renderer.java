@@ -7,12 +7,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
@@ -104,97 +108,42 @@ public sealed class Renderer permits ParticleRenderer {
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This will be rendered synchronously. To render asynchronously, use {@link #renderClassAsync(Location, Class)}.
-     * <p>
-     * This method will parse the class then execute it, this can cause issues, I recommend using
-     * {@link #renderType(Location, CustomParticleType, CustomParticle)} instead. This method is only here for convenience.
+     * This will be rendered synchronously. To render asynchronously, use {@link #renderTypeAsync(Location, CustomParticleType, CustomParticle, Consumer, Consumer, Consumer)}.
      *
      * @since 1.0
      * @param location
-     * @param clazz
+     * @param type
+     * @param particle
      */
-    protected <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz) {
+    protected void renderTimed(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle, long delay, @NotNull TimeUnit time,
+                               Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
+        long start = System.currentTimeMillis();
+        long timeMillis = time.toMillis(delay);
 
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            renderType(location, type, particle, onRender, onRenderStart, onRenderFinish);
+
+            if (System.currentTimeMillis() - start >= timeMillis) executor.shutdown();
+        }, 120, 120, TimeUnit.MILLISECONDS);
     }
 
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This method will parse the class then execute it, this can cause issues, I recommend using
-     * {@link #renderType(Location, CustomParticleType, CustomParticle)} instead. This method is only here for convenience.
-     * <p>
-     * This will be rendered asynchronously. To render synchronously, use {@link #renderClass(Location, Class)}.
+     * This will be rendered asynchronously. To render synchronously, use {@link #renderType(Location, CustomParticleType, CustomParticle, Consumer, Consumer, Consumer)}.
      * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
      * This feature is experimental and may not work as expected.
      *
      * @since 1.0
      * @param location
-     * @param clazz
+     * @param type
+     * @param particle
      * @return CompletableFuture
      */
-    @ApiStatus.Experimental
-    protected <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz) {
-        return CompletableFuture.runAsync(() -> renderClass(location, clazz));
-    }
-
-    /**
-     * Renders a particle type at the specified location. This will render the particle type with the options given.
-     * <p>
-     * This will be rendered synchronously. To render asynchronously, use {@link #renderCustomAsync(CustomRenderer)}.
-     *
-     * @since 1.0
-     * @param location
-     * @param clazz
-     * @param options
-     */
-    protected <T extends ParticleRenderer> void renderClass(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
-
-    }
-
-    /**
-     * Renders a particle type at the specified location. This will render the particle type with the options given.
-     * <p>
-     * This will be rendered asynchronously. To render synchronously, use {@link #renderCustom(CustomRenderer)}.
-     * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
-     * This feature is experimental and may not work as expected.
-     *
-     * @since 1.0
-     * @param location
-     * @param clazz
-     * @param options
-     * @return CompletableFuture
-     */
-    @ApiStatus.Experimental
-    protected <T extends ParticleRenderer> CompletableFuture<Void> renderClassAsync(@NotNull Location location, @NotNull Class<T> clazz, @NotNull ParticleOptions options) {
-        return CompletableFuture.runAsync(() -> renderClass(location, clazz, options));
-    }
-
-    /**
-     * Renders a particle type at the specified location. This will render the particle type with the options given.
-     * <p>
-     * This will be rendered synchronously. To render asynchronously, use {@link #renderCustomAsync(CustomRenderer)}.
-     *
-     * @since 1.0
-     * @param renderer
-     */
-    protected void renderCustom(@NotNull CustomRenderer renderer) {
-
-    }
-
-    /**
-     * Renders a particle type at the specified location. This will render the particle type with the options given.
-     * <p>
-     * This will be rendered asynchronously. To render synchronously, use {@link #renderCustom(CustomRenderer)}.
-     * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
-     * This feature is experimental and may not work as expected.
-     *
-     * @since 1.0
-     * @param renderer
-     * @return CompletableFuture
-     */
-    @ApiStatus.Experimental
-    protected CompletableFuture<Void> renderCustomAsync(@NotNull CustomRenderer renderer) {
-        return CompletableFuture.runAsync(() -> renderCustom(renderer));
+    protected CompletableFuture<Void> renderTimedAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle, long delay, @NotNull TimeUnit time,
+                                                        Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
+        return CompletableFuture.runAsync(() -> renderTimed(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish));
     }
 
 }
