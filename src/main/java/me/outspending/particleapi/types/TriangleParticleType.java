@@ -35,8 +35,7 @@ public class TriangleParticleType implements CustomParticleType {
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.DENSITY, 1)
             .setOption(ParticleOption.HEIGHT, 1D)
-            .setOption(ParticleOption.ROTATION, 1D)
-            .setOption(ParticleOption.HOLLOW, true);
+            .setOption(ParticleOption.ROTATION, 1D);
 
     @NotNull
     @Override
@@ -46,32 +45,18 @@ public class TriangleParticleType implements CustomParticleType {
         int density = options.getIntegerOption(ParticleOption.DENSITY);
         double height = options.getDoubleOption(ParticleOption.HEIGHT);
         double rotation = options.getDoubleOption(ParticleOption.ROTATION);
-        boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
-
-        int particlePoints = density * 3;
-        double angleIncrement = Math.toRadians(360.0 / particlePoints);
 
         List<Vector> points = new ArrayList<>();
-        for (int i = 0; i < particlePoints; i++) {
+        points.add(new Vector(0, height, 0));
+
+        double angleIncrement = Math.toRadians(360.0 / density);
+
+        for (int i = 0; i < density; i++) {
             double angle = i * angleIncrement;
             double x = Math.cos(angle + rotation) * radius;
             double z = Math.sin(angle + rotation) * radius;
 
-            double y = startingLocation.getY() + height;
-
-            Vector particlePoint = new Vector(x, y, z).add(startingLocation.toVector());
-            points.add(particlePoint);
-
-            if (!hollow || i % 3 != 0) {
-                Vector nextPoint;
-                if (i == particlePoints - 1) {
-                    nextPoint = points.get(0);
-                } else {
-                    nextPoint = points.get(i + 1);
-                }
-                Vector midPoint = particlePoint.clone().midpoint(nextPoint);
-                points.add(midPoint);
-            }
+            points.add(new Vector(x, height, z));
         }
 
         return points;

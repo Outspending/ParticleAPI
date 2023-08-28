@@ -22,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
  *     <li>{@code radius} ({@link Double}) - The radius of the helix</li>
  *     <li>{@code height} ({@link Double}) - The height of the helix</li>
  *     <li>{@code density} ({@link Integer}) - The density of the helix</li>
- *     <li>{@code hollow} ({@link Boolean}) - Whether or not the helix is hollow</li>
  * </ul>
  *
  * @see CustomParticleType
@@ -34,8 +33,7 @@ public class HelixParticleType implements CustomParticleType {
     private final ParticleOptions options = new ParticleOptions()
             .setOption(ParticleOption.RADIUS, 1D)
             .setOption(ParticleOption.HEIGHT, 1D)
-            .setOption(ParticleOption.DENSITY, 1)
-            .setOption(ParticleOption.HOLLOW, true);
+            .setOption(ParticleOption.DENSITY, 1);
 
     @NotNull
     @Override
@@ -44,16 +42,16 @@ public class HelixParticleType implements CustomParticleType {
         double radius = options.getDoubleOption(ParticleOption.RADIUS);
         double height = options.getDoubleOption(ParticleOption.HEIGHT);
         int density = options.getIntegerOption(ParticleOption.DENSITY);
-        boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         List<Vector> points = new ArrayList<>();
         for (int i = 0; i <= 360 * density; i++) {
             double angle = Math.toRadians(i / (double) density);
+
             double x = radius * Math.cos(angle);
+            double y = angle * height / (2 * Math.PI);
             double z = radius * Math.sin(angle);
 
-            double y = (hollow ? height / 2 : 0) + angle * height / (2 * Math.PI);
-            points.add(startingLocation.clone().add(x, y, z).toVector());
+            points.add(new Vector(x, y, z));
         }
 
         return points;

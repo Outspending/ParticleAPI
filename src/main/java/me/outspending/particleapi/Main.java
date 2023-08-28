@@ -20,11 +20,17 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        ParticleRenderer renderer = CustomParticleType.builder(new CircleParticleType())
+        ParticleRenderer renderer = CustomParticleType.builder(ParticleType.TRIANGLE)
                 .particleType(CustomParticle.dust(Color.RED, 1))
+                .editOption(ParticleOption.RADIUS, 5D)
+                .editOption(ParticleOption.DENSITY, 100)
+                .editOption(ParticleOption.HEIGHT, 5D)
+                .editOption(ParticleOption.ROTATION, 0D)
+                .editOption(ParticleOption.HOLLOW, false)
                 .build();
 
-        renderer.renderTimedAsync(e.getBlock().getLocation(), 5, TimeUnit.SECONDS);
+        for (int i = 0; i < 25; i++)
+            renderer.render(e.getBlock().getLocation());
 
 //        new BukkitRunnable() {
 //

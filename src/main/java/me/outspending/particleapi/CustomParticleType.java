@@ -30,8 +30,8 @@ public interface CustomParticleType {
      * @param type
      * @return
      */
-    static Builder builder(@NotNull CustomParticleType type) {
-        return new Builder(type);
+    static Builder builder(@NotNull ParticleType type) {
+        return new Builder(type.getType());
     }
 
     /**

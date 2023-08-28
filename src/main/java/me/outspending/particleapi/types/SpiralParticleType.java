@@ -31,10 +31,10 @@ import java.util.List;
 public class SpiralParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
-            .setOption(ParticleOption.RADIUS, 1D)
-            .setOption(ParticleOption.DENSITY, 1)
-            .setOption(ParticleOption.HEIGHT, 1D)
-            .setOption(ParticleOption.ROTATION, 1D);
+            .setOption(ParticleOption.RADIUS, 5D)
+            .setOption(ParticleOption.DENSITY, 360)
+            .setOption(ParticleOption.HEIGHT, 25D)
+            .setOption(ParticleOption.ROTATION, 0D);
 
     @NotNull
     @Override
@@ -51,7 +51,7 @@ public class SpiralParticleType implements CustomParticleType {
         List<Vector> points = new ArrayList<>();
         for (int i = 0; i < density; i++) {
             double angle = i * angleIncrement;
-            double y = i * heightIncrement;
+            double y = i * heightIncrement / 5;
 
             double x = Math.cos(angle + rotation) * radius;
             double z = Math.sin(angle + rotation) * radius;

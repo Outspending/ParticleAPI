@@ -105,7 +105,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
-    public void renderTimed(@NotNull Location location, int delay, @NotNull TimeUnit time) {
+    public void renderTimed(@NotNull Location location, @NotNull TimeUnit time, int delay) {
         renderTimed(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
     }
 
@@ -118,7 +118,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
-    public void renderTimedAsync(@NotNull Location location, int delay, @NotNull TimeUnit time) {
+    public void renderTimedAsync(@NotNull Location location, @NotNull TimeUnit time, int delay) {
         renderTimedAsync(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
     }
 

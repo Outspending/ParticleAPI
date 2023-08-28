@@ -31,28 +31,28 @@ import java.util.List;
 public class WaveParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
-            .setOption(ParticleOption.RADIUS, 1D)
-            .setOption(ParticleOption.DENSITY, 1)
-            .setOption(ParticleOption.HEIGHT, 1D)
-            .setOption(ParticleOption.ROTATION, 1D);
+            .setOption(ParticleOption.DENSITY, 100)
+            .setOption(ParticleOption.HEIGHT, 5D)
+            .setOption(ParticleOption.ROTATION, 0D);
 
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
 
-        double radius = options.getDoubleOption(ParticleOption.RADIUS);
         int density = options.getIntegerOption(ParticleOption.DENSITY);
         double height = options.getDoubleOption(ParticleOption.HEIGHT);
         double rotation = options.getDoubleOption(ParticleOption.ROTATION);
 
-        List<Vector> points = new ArrayList<>();
-        for (int i = 0; i < density; i++) {
-            double angle = (2 * Math.PI * i) / density;
-            double x = radius * Math.cos(angle);
-            double z = radius * Math.sin(angle);
+        double xRotation = Math.toRadians(rotation);
 
-            Vector point = new Vector(x, height, z);
-            points.add(point);
+        List<Vector> points = new ArrayList<>();
+        for (double i = 0; i < density; i += 0.1) {
+            double angle = Math.sin(i) * height;
+
+            double y = angle * Math.cos(xRotation) - i * Math.sin(xRotation);
+            double z = angle * Math.sin(xRotation) + i * Math.cos(xRotation);
+
+            points.add(new Vector(0, y, z));
         }
 
         return points;
