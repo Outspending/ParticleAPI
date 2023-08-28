@@ -1,17 +1,13 @@
-plugins {
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'xyz.jpenilla.run-paper' version '2.1.0'
-}
+//plugins {
+//    id 'com.github.johnrengelman.shadow' version '8.1.1'
+//    id 'xyz.jpenilla.run-paper' version '2.1.0'
+//}
 
-group = 'me.outspending'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'org.outspending.particleapi'
 version = '0.0.1'
-
-allprojects {
-    apply plugin: 'java'
-
-    group = 'me.outspending'
-    version = '0.0.1'
-}
 
 repositories {
     mavenCentral()
@@ -33,10 +29,23 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-shadowJar {
-    destinationDirectory = file("D:\\MC Server\\plugins")
+//shadowJar {
+//    destinationDirectory = file("D:\\MC Server\\plugins")
+//}
+//
+//tasks.runServer {
+//    minecraftVersion("1.20.1")
+//}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
-tasks.runServer {
-    minecraftVersion("1.20.1")
+wrapper {
+    gradleVersion = "8.1.1"
+    distributionType = Wrapper.DistributionType.ALL
 }
