@@ -196,7 +196,9 @@ public class ParticleOptions {
      * @param value
      * @return
      */
-    public ParticleOptions setOption(@NotNull ParticleOption key, @NotNull Object value) {
+    public @Nullable ParticleOptions setOption(@NotNull ParticleOption key, @NotNull Object value) {
+        if (hasOption(key)) return null;
+
         options.put(key, value);
         return this;
     }
