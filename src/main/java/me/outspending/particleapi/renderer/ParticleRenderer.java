@@ -5,6 +5,8 @@ import org.bukkit.Location;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.concurrent.ThreadSafe;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -22,7 +24,7 @@ public non-sealed class ParticleRenderer extends Renderer {
     private final CustomParticle particle;
 
     private final Consumer<CustomParticle> onRender;
-    private final Consumer<CustomParticle> onRenderComplete;
+    private final Consumer<CustomParticle> onRenderStart;
     private final Consumer<CustomParticle> onRenderFinish;
 
     /**
@@ -31,17 +33,18 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @since 1.0
      * @param type
      * @param options
+     * @param particle
      * @param onRender
-     * @param onRenderComplete
+     * @param onRenderStart
      * @param onRenderFinish
      */
     public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, CustomParticle particle,
-                            Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderComplete, Consumer<CustomParticle> onRenderFinish) {
+                            Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
         this.type = type;
         this.options = options;
         this.particle = particle;
         this.onRender = onRender;
-        this.onRenderComplete = onRenderComplete;
+        this.onRenderStart = onRenderStart;
         this.onRenderFinish = onRenderFinish;
     }
 
@@ -51,6 +54,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @since 1.0
      * @param type
      * @param options
+     * @param particle
      */
     public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, @NotNull CustomParticle particle) {
         this(type, options, particle, null, null, null);
@@ -77,8 +81,8 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
-    public void render(Location location) {
-        renderType(location, type, particle);
+    public void render(@NotNull Location location) {
+        renderType(location, type, particle, onRender, onRenderStart, onRenderFinish);
     }
 
     /**
@@ -87,8 +91,41 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @since 1.0
      * @return CompletableFuture
      */
-    public CompletableFuture<Void> renderAsync(Location location) {
-        return CompletableFuture.runAsync(() -> render(location));
+    public CompletableFuture<Void> renderAsync(@NotNull Location location) {
+        return renderTypeAsync(location, type, particle, onRender, onRenderStart, onRenderFinish);
+    }
+
+    /**
+     * Renders multiple {@link CustomParticleType}s synchronously.
+     * <p>
+     * Be careful with this, this can cause lag to the server / client.
+     * This is also experimental, so it may not work as expected / cause bugs.
+     *
+     * @since 1.0
+     * @param location
+     * @param rendererSet
+     */
+    @ApiStatus.Experimental
+    public void renderMultiple(@NotNull Location location, Set<ParticleRenderer> rendererSet) {
+        for (ParticleRenderer renderer : rendererSet)
+            renderer.render(location);
+    }
+
+    /**
+     * Renders multiple {@link CustomParticleType}s asynchronously.
+     * <p>
+     * Be careful with this, this can cause lag to the server / client.
+     * This is also experimental, so it may not work as expected / cause bugs.
+     *
+     * @since 1.0
+     * @param location
+     * @param rendererSet
+     * @return CompletableFuture
+     */
+    @ApiStatus.Experimental
+    public void renderMultipleAsync(@NotNull Location location, Set<ParticleRenderer> rendererSet) {
+        for (ParticleRenderer renderer : rendererSet)
+            renderer.renderAsync(location);
     }
 
 }

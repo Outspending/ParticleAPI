@@ -37,30 +37,28 @@ public class StarParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        List<Vector> points = new ArrayList<>();
 
-        double radius = options.getDoubleOption("radius");
-        int density = options.getIntegerOption("density");
-        double rotation = options.getDoubleOption("rotation");
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        int density = options.getIntegerOption(ParticleOption.HEIGHT);
+        double rotation = options.getDoubleOption(ParticleOption.ROTATION);
 
         int particlePoints = density * 2;
         double angleIncrement = Math.toRadians(360.0 / particlePoints);
 
+        List<Vector> points = new ArrayList<>();
         for (int i = 0; i < particlePoints; i++) {
             double angle = i * angleIncrement;
             double x = Math.cos(angle + rotation) * radius;
             double z = Math.sin(angle + rotation) * radius;
 
-            Vector particlePoint = new Vector(x, 0, z).add(startingLocation.toVector());
-            points.add(particlePoint);
+            points.add(new Vector(x, 0, z));
 
             if (i % 2 == 0) {
                 double innerRadius = radius / 2.0;
                 double innerX = Math.cos(angle + angleIncrement / 2 + rotation) * innerRadius;
                 double innerZ = Math.sin(angle + angleIncrement / 2 + rotation) * innerRadius;
 
-                Vector innerParticlePoint = new Vector(innerX, 0, innerZ).add(startingLocation.toVector());
-                points.add(innerParticlePoint);
+                points.add(new Vector(innerX, 0, innerZ));
             }
         }
 
@@ -73,7 +71,7 @@ public class StarParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

@@ -41,17 +41,17 @@ public class TriangleParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        List<Vector> points = new ArrayList<>();
 
-        double radius = options.getDoubleOption("radius");
-        int density = options.getIntegerOption("density");
-        double height = options.getDoubleOption("height");
-        double rotation = options.getDoubleOption("rotation");
-        boolean hollow = options.getBooleanOption("hollow");
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        double height = options.getDoubleOption(ParticleOption.HEIGHT);
+        double rotation = options.getDoubleOption(ParticleOption.ROTATION);
+        boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         int particlePoints = density * 3;
         double angleIncrement = Math.toRadians(360.0 / particlePoints);
 
+        List<Vector> points = new ArrayList<>();
         for (int i = 0; i < particlePoints; i++) {
             double angle = i * angleIncrement;
             double x = Math.cos(angle + rotation) * radius;
@@ -84,7 +84,7 @@ public class TriangleParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

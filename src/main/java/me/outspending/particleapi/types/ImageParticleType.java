@@ -54,7 +54,7 @@ public class ImageParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

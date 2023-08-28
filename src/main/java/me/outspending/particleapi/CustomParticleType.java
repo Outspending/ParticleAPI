@@ -65,7 +65,7 @@ public interface CustomParticleType {
      * @since 1.0
      * @return
      */
-    @NotNull List<String> getRequiredOptions();
+    @NotNull List<ParticleOption> getRequiredOptions();
 
     /**
      * Represents a builder for a custom particle type.

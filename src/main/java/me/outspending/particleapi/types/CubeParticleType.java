@@ -41,11 +41,12 @@ public class CubeParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        double size = options.getDoubleOption("size");
-        double rotationX = options.getDoubleOption("rotationX");
-        double rotationY = options.getDoubleOption("rotationY");
-        double rotationZ = options.getDoubleOption("rotationZ");
-        int density = options.getIntegerOption("density");
+
+        double size = options.getDoubleOption(ParticleOption.SIZE);
+        double rotationX = options.getDoubleOption(ParticleOption.ROTATION_X);
+        double rotationY = options.getDoubleOption(ParticleOption.ROTATION_Y);
+        double rotationZ = options.getDoubleOption(ParticleOption.ROTATION_Z);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
 
         List<Vector> offsets = new ArrayList<>();
         for (int i = 0; i < density; i++) {
@@ -65,7 +66,7 @@ public class CubeParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

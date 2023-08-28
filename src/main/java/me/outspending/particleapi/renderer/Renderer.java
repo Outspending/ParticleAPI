@@ -1,9 +1,6 @@
 package me.outspending.particleapi.renderer;
 
-import me.outspending.particleapi.CustomParticle;
-import me.outspending.particleapi.CustomParticleType;
-import me.outspending.particleapi.CustomRenderer;
-import me.outspending.particleapi.ParticleOptions;
+import me.outspending.particleapi.*;
 import me.outspending.particleapi.particles.ParticleHandler;
 import me.outspending.particleapi.particles.ParticleHandlerImpl;
 import org.bukkit.Bukkit;
@@ -16,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
  * The main renderer class.
@@ -58,7 +56,7 @@ public sealed class Renderer permits ParticleRenderer {
     @Deprecated(forRemoval = true)
     protected boolean hasAllRequiredOptions(@NotNull CustomParticleType type) {
         ParticleOptions options = type.getOptions();
-        for (String option : type.getRequiredOptions()) {
+        for (ParticleOption option : type.getRequiredOptions()) {
             if (!options.hasOption(option)) return false;
         }
         return true;
@@ -67,14 +65,15 @@ public sealed class Renderer permits ParticleRenderer {
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This will be rendered synchronously. To render asynchronously, use {@link #renderTypeAsync(Location, CustomParticleType, CustomParticle)}.
+     * This will be rendered synchronously. To render asynchronously, use {@link #renderTypeAsync(Location, CustomParticleType, CustomParticle, Consumer, Consumer, Consumer)}.
      *
      * @since 1.0
      * @param location
      * @param type
      * @param particle
      */
-    protected void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
+    protected void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle,
+                              Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
         List<Vector> points = getAllPoints(location, type);
 
         for (Vector point : points) {
@@ -86,7 +85,7 @@ public sealed class Renderer permits ParticleRenderer {
     /**
      * Renders a particle type at the specified location. This will render the particle type with the options given.
      * <p>
-     * This will be rendered asynchronously. To render synchronously, use {@link #renderType(Location, CustomParticleType, CustomParticle)}.
+     * This will be rendered asynchronously. To render synchronously, use {@link #renderType(Location, CustomParticleType, CustomParticle, Consumer, Consumer, Consumer)}.
      * Remember, this will not be rendered on the main thread, so you cannot modify anything with the {@link ParticleRenderer}.
      * This feature is experimental and may not work as expected.
      *
@@ -97,8 +96,9 @@ public sealed class Renderer permits ParticleRenderer {
      * @return CompletableFuture
      */
     @ApiStatus.Experimental
-    protected CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle) {
-        return CompletableFuture.runAsync(() -> renderType(location, type, particle));
+    protected CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle,
+                                                      Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
+        return CompletableFuture.runAsync(() -> renderType(location, type, particle, onRender, onRenderStart, onRenderFinish));
     }
 
     /**

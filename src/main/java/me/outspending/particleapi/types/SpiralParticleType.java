@@ -39,16 +39,16 @@ public class SpiralParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        List<Vector> points = new ArrayList<>();
 
-        double radius = options.getDoubleOption("radius");
-        int density = options.getIntegerOption("density");
-        double height = options.getDoubleOption("height");
-        double rotation = options.getDoubleOption("rotation");
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        double height = options.getDoubleOption(ParticleOption.HEIGHT);
+        double rotation = options.getDoubleOption(ParticleOption.ROTATION);
 
         double angleIncrement = Math.toRadians(360.0 / density);
         double heightIncrement = height / density;
 
+        List<Vector> points = new ArrayList<>();
         for (int i = 0; i < density; i++) {
             double angle = i * angleIncrement;
             double y = i * heightIncrement;
@@ -56,8 +56,7 @@ public class SpiralParticleType implements CustomParticleType {
             double x = Math.cos(angle + rotation) * radius;
             double z = Math.sin(angle + rotation) * radius;
 
-            Vector particlePoint = new Vector(x, y, z).add(startingLocation.toVector());
-            points.add(particlePoint);
+            points.add(new Vector(x, y, z));
         }
 
         return points;
@@ -69,7 +68,7 @@ public class SpiralParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

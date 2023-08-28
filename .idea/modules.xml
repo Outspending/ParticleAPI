@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ParticleAPI.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-examples/ParticleAPI.particleapi-examples.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-examples/ParticleAPI.particleapi-examples.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.jmh.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.jmh.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.main.iml" filepath="$PROJECT_DIR$/.idea/modules/particleapi-jmh/ParticleAPI.particleapi-jmh.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.outspending.ParticleAPI.main.iml" />
     </modules>
   </component>

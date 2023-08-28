@@ -40,20 +40,19 @@ public class LineParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        double length = options.getDoubleOption("length");
-        double rotationX = options.getDoubleOption("rotationX");
-        double rotationY = options.getDoubleOption("rotationY");
-        double rotationZ = options.getDoubleOption("rotationZ");
+
+        double length = options.getDoubleOption(ParticleOption.LENGTH);
+        double rotationX = options.getDoubleOption(ParticleOption.ROTATION_X);
+        double rotationY = options.getDoubleOption(ParticleOption.ROTATION_Y);
+        double rotationZ = options.getDoubleOption(ParticleOption.ROTATION_Z);
 
         List<Vector> points = new ArrayList<>();
         Vector direction = new Vector(0, 0, 1).rotateAroundAxis(new Vector(1, 0, 0), rotationX)
                 .rotateAroundAxis(new Vector(0, 1, 0), rotationY)
                 .rotateAroundAxis(new Vector(0, 0, 1), rotationZ);
 
-        for (double t = 0; t <= length; t += 0.1) {
-            Vector point = direction.clone().multiply(t).add(startingLocation.toVector());
-            points.add(point);
-        }
+        for (double t = 0; t <= length; t += 0.1)
+            points.add(direction.clone().multiply(t));
 
         return points;
     }
@@ -64,7 +63,7 @@ public class LineParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

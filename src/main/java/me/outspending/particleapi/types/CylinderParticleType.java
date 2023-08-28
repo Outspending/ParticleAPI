@@ -40,13 +40,13 @@ public class CylinderParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        double radius = options.getDoubleOption("radius");
-        double height = options.getDoubleOption("height");
-        int density = options.getIntegerOption("density");
-        boolean hollow = options.getBooleanOption("hollow");
+
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        double height = options.getDoubleOption(ParticleOption.HEIGHT);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         List<Vector> particleOffsets = new ArrayList<>();
-
         for (int i = 0; i < density; i++) {
             double angle = 2 * Math.PI * i / density;
             double x = radius * Math.cos(angle);
@@ -76,7 +76,7 @@ public class CylinderParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

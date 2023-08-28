@@ -39,13 +39,13 @@ public class WaveParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
+
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        double height = options.getDoubleOption(ParticleOption.HEIGHT);
+        double rotation = options.getDoubleOption(ParticleOption.ROTATION);
+
         List<Vector> points = new ArrayList<>();
-
-        double radius = options.getDoubleOption("radius");
-        int density = options.getIntegerOption("density");
-        double height = options.getDoubleOption("height");
-        double rotation = options.getDoubleOption("rotation");
-
         for (int i = 0; i < density; i++) {
             double angle = (2 * Math.PI * i) / density;
             double x = radius * Math.cos(angle);
@@ -64,7 +64,7 @@ public class WaveParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 }

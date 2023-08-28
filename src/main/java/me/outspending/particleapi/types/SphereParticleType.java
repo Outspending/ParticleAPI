@@ -38,15 +38,15 @@ public class SphereParticleType implements CustomParticleType {
     @NotNull
     @Override
     public List<Vector> render(@NotNull Location startingLocation) {
-        List<Vector> particlePoints = new ArrayList<>();
 
-        double radius = options.getDoubleOption("radius");
-        int density = options.getIntegerOption("density");
-        boolean hollow = options.getBooleanOption("hollow");
+        double radius = options.getDoubleOption(ParticleOption.RADIUS);
+        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         int points = (int) (4 * Math.PI * radius * radius * density);
         double phiIncrement = Math.PI * (3 - Math.sqrt(5));
 
+        List<Vector> particlePoints = new ArrayList<>();
         for (int i = 0; i < points; i++) {
             double y = 1 - (i / (double) (points - 1)) * 2;
             double radiusAtY = Math.sqrt(1 - y * y) * radius;
@@ -56,7 +56,11 @@ public class SphereParticleType implements CustomParticleType {
             double x = Math.cos(theta) * radiusAtY;
             double z = Math.sin(theta) * radiusAtY;
 
-            if (hollow || y > 0) particlePoints.add(new Vector(x, y * radius, z));
+            if (hollow) {
+                particlePoints.add(new Vector(x, y * radius, z));
+            } else if (y > 0) {
+                particlePoints.add(new Vector(x, y * radius, z));
+            }
         }
 
         return particlePoints;
@@ -68,7 +72,7 @@ public class SphereParticleType implements CustomParticleType {
     }
 
     @Override
-    public @NotNull List<String> getRequiredOptions() {
+    public @NotNull List<ParticleOption> getRequiredOptions() {
         return options.getAllOptions();
     }
 

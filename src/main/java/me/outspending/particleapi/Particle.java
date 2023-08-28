@@ -6,12 +6,14 @@ import me.outspending.particleapi.particles.TransitionParticleType;
 
 /**
  * Represents a particle type.
+ * <p>
+ * This class is deprecated and will be removed in a future release.
+ * This has been replaced with {@link CustomParticle}. This class will no longer be maintained to support new features.
  *
  * @see CustomParticle
- * @see me.outspending.particleapi.renderer.Renderer
  * @since 1.0
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public enum Particle {
 
     /**
