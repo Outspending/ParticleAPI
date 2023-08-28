@@ -8,7 +8,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    RADIUS("radius"),
+    RADIUS("radius", Double.class),
 
     /**
      * Represents the size of a particle.
@@ -16,7 +16,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    SIZE("size"),
+    SIZE("size", Double.class),
 
     /**
      * Represents the density of a particle.
@@ -24,7 +24,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    DENSITY("density"),
+    DENSITY("density", Integer.class),
 
     /**
      * Represents the height of a particle.
@@ -32,7 +32,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.HelixParticleType
      * @since 1.0
      */
-    HEIGHT("height"),
+    HEIGHT("height", Double.class),
 
     /**
      * Represents the rotation of a particle.
@@ -40,7 +40,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.HelixParticleType
      * @since 1.0
      */
-    ROTATION("rotation"),
+    ROTATION("rotation", Double.class),
 
     /**
      * Represents whether or not a particle is hollow.
@@ -48,7 +48,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.HelixParticleType
      * @since 1.0
      */
-    HOLLOW("hollow"),
+    HOLLOW("hollow", Boolean.class),
 
     /**
      * Represents the rotation of a particle on the X axis.
@@ -56,7 +56,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_X("rotationX"),
+    ROTATION_X("rotationX", Double.class),
 
     /**
      * Represents the rotation of a particle on the Y axis.
@@ -64,7 +64,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_Y("rotationY"),
+    ROTATION_Y("rotationY", Double.class),
 
     /**
      * Represents the rotation of a particle on the Z axis.
@@ -72,7 +72,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_Z("rotationZ"),
+    ROTATION_Z("rotationZ", Double.class),
 
     /**
      * Represents the image of a particle.
@@ -80,7 +80,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    IMAGE("image"),
+    IMAGE("image", String.class),
 
     /**
      * Represents the width of a particle.
@@ -88,7 +88,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    WIDTH("width"),
+    WIDTH("width", Double.class),
 
     /**
      * Represents the height of a particle.
@@ -96,7 +96,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    PIXEL_SIZE("pixelSize"),
+    PIXEL_SIZE("pixelSize", Integer.class),
 
     /**
      * Represents the display text of a particle.
@@ -104,7 +104,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.TextParticleType
      * @since 1.0
      */
-    TEXT("text"),
+    TEXT("text", String.class),
 
     /**
      * Represents the display font of a particle.
@@ -112,7 +112,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.TextParticleType
      * @since 1.0
      */
-    FONT("font"),
+    FONT("font", String.class),
 
     /**
      * Represents the display font size of a particle.
@@ -120,15 +120,21 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.TextParticleType
      * @since 1.0
      */
-    LENGTH("length");
+    LENGTH("length", Integer.class);
 
     private final String optionName;
+    private final Class<?> classType;
 
-    ParticleOption(String optionName) {
+    ParticleOption(String optionName, Class<?> classType) {
         this.optionName = optionName;
+        this.classType = classType;
     }
 
     public String getOptionName() {
         return optionName;
+    }
+
+    public Class<?> getClassType() {
+        return classType;
     }
 }

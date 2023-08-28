@@ -18,7 +18,20 @@ import java.util.List;
  */
 public class ParticleOptions {
 
-    private HashMap<String, Object> options = new HashMap<>();
+    private HashMap<ParticleOption, Object> options = new HashMap<>();
+
+
+    /**
+     * Checks if the particle type is the same class as the value
+     *
+     * @since 1.0
+     * @param key
+     * @param value
+     * @return
+     */
+    private boolean isOptionCompatible(@NotNull ParticleOption key, @NotNull Object value) {
+        return key.getClassType().isInstance(value);
+    }
 
     /**
      * Sets an option for the particle type.
@@ -28,7 +41,7 @@ public class ParticleOptions {
      * @param value
      * @return
      */
-    private String getStringOption(@NotNull String key, @NotNull Object value) {
+    private String getStringOption(@NotNull ParticleOption key, @NotNull Object value) {
         return String.valueOf(value);
     }
 
@@ -39,7 +52,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public boolean hasOption(@NotNull String key) {
+    public boolean hasOption(@NotNull ParticleOption key) {
         return options.containsKey(key);
     }
 
@@ -52,10 +65,8 @@ public class ParticleOptions {
      * @param value
      */
     public void editOption(@NotNull ParticleOption key, @NotNull Object value) {
-        String optionName = key.getOptionName();
-        if (!hasOption(optionName)) return;
-
-        setOption(optionName, value);
+        if (hasOption(key) && isOptionCompatible(key, value))
+            setOption(key, value);
     }
 
     /**
@@ -65,7 +76,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public @Nullable Object getOption(@NotNull String key) {
+    public @Nullable Object getOption(@NotNull ParticleOption key) {
         return options.get(key);
     }
 
@@ -76,7 +87,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public @Nullable String getStringOption(@NotNull String key) {
+    public @Nullable String getStringOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return String.valueOf(value);
     }
@@ -88,7 +99,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public int getIntegerOption(@NotNull String key) {
+    public int getIntegerOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Integer.parseInt(getStringOption(key, value));
     }
@@ -100,7 +111,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public double getDoubleOption(@NotNull String key) {
+    public double getDoubleOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Double.parseDouble(getStringOption(key, value));
     }
@@ -112,7 +123,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public boolean getBooleanOption(@NotNull String key) {
+    public boolean getBooleanOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Boolean.parseBoolean(getStringOption(key, value));
     }
@@ -124,7 +135,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public long getLongOption(@NotNull String key) {
+    public long getLongOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Long.parseLong(getStringOption(key, value));
     }
@@ -136,7 +147,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public float getFloatOption(@NotNull String key) {
+    public float getFloatOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Float.parseFloat(getStringOption(key, value));
     }
@@ -148,7 +159,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public byte getByteOption(@NotNull String key) {
+    public byte getByteOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Byte.parseByte(getStringOption(key, value));
     }
@@ -160,7 +171,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public short getShortOption(@NotNull String key) {
+    public short getShortOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return Short.parseShort(getStringOption(key, value));
     }
@@ -172,7 +183,7 @@ public class ParticleOptions {
      * @param key
      * @return
      */
-    public char getCharOption(@NotNull String key) {
+    public char getCharOption(@NotNull ParticleOption key) {
         Object value = options.get(key);
         return getStringOption(key, value).charAt(0);
     }
@@ -186,19 +197,6 @@ public class ParticleOptions {
      * @return
      */
     public ParticleOptions setOption(@NotNull ParticleOption key, @NotNull Object value) {
-        options.put(key.getOptionName(), value);
-        return this;
-    }
-
-    /**
-     * Sets an option for the particle type.
-     *
-     * @since 1.0
-     * @param key
-     * @param value
-     * @return
-     */
-    public ParticleOptions setOption(@NotNull String key, @NotNull Object value) {
         options.put(key, value);
         return this;
     }
@@ -209,10 +207,17 @@ public class ParticleOptions {
      * @since 1.0
      * @return
      */
-    public List<String> getAllOptions() {
+    public List<ParticleOption> getAllOptions() {
         return new ArrayList<>(options.keySet());
     }
 
+    /**
+     * Gets the default options for a particle type.
+     *
+     * @since 1.0
+     * @param clazz
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public static ParticleOptions getDefaults(Class<? extends CustomParticleType> clazz) {
         return clazz.cast(null).getOptions();
