@@ -1,16 +1,22 @@
 plugins {
-    id 'java'
+    id 'me.champeau.jmh' version '0.7.1'
 }
-
-group = 'me.outspending'
-version = '0.0.1'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
 }
 
 dependencies {
-    implementation 'org.openjdk.jmh:jmh-core:1.37'
-    implementation 'org.openjdk.jmh:jmh-generator-annprocess:1.37'
-    implementation(rootProject)
+    jmhImplementation 'io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT'
+    jmhImplementation rootProject
+    jmh 'org.openjdk.jmh:jmh-core:1.37'
+    jmhAnnotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.37'
 }

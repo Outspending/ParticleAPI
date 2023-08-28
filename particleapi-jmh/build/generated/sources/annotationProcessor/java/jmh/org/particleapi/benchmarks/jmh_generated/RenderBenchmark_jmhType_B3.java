@@ -1,5 +1,5 @@
-package org.outspending.jmh_generated;
-public class Main_jmhType_B3 extends Main_jmhType_B2 {
+package org.particleapi.benchmarks.jmh_generated;
+public class RenderBenchmark_jmhType_B3 extends RenderBenchmark_jmhType_B2 {
     byte b3_000, b3_001, b3_002, b3_003, b3_004, b3_005, b3_006, b3_007, b3_008, b3_009, b3_010, b3_011, b3_012, b3_013, b3_014, b3_015;
     byte b3_016, b3_017, b3_018, b3_019, b3_020, b3_021, b3_022, b3_023, b3_024, b3_025, b3_026, b3_027, b3_028, b3_029, b3_030, b3_031;
     byte b3_032, b3_033, b3_034, b3_035, b3_036, b3_037, b3_038, b3_039, b3_040, b3_041, b3_042, b3_043, b3_044, b3_045, b3_046, b3_047;

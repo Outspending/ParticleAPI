@@ -82,16 +82,13 @@ public non-sealed class ParticleRenderer extends Renderer {
     }
 
     /**
-     * This is deprecated and will be removed in the future.
-     * This has been moved to {@link Renderer} class.
+     * This will render the particle effect asynchronously.
      *
      * @since 1.0
-     * @deprecated This is deprecated and will be removed in the future.
      * @return CompletableFuture
      */
-    @Deprecated(forRemoval = true)
     public CompletableFuture<Void> renderAsync(Location location) {
-        return CompletableFuture.runAsync(() -> renderType(location, type, particle));
+        return CompletableFuture.runAsync(() -> render(location));
     }
 
 }

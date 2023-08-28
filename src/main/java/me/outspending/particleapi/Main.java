@@ -36,7 +36,7 @@ public class Main extends JavaPlugin implements Listener {
             @Override
             public void run() {
                 renderer.editOption(ParticleOption.RADIUS, number);
-                renderer.render(location);
+                renderer.renderAsync(location);
 
                 if (number >= 10) cancel();
                 number += 0.1;
