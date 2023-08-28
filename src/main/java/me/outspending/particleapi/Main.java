@@ -41,7 +41,7 @@ public class Main extends JavaPlugin implements Listener {
                 if (number >= 10) cancel();
                 number += 0.1;
             }
-        }.runTaskTimer(this, 5, 5);
+        }.runTaskTimer(this, 1, 1);
 
         long end = System.currentTimeMillis();
         Bukkit.broadcastMessage("Rendered in " + (end - start) + "ms");
