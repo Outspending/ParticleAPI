@@ -1,5 +1,6 @@
 package me.outspending.particleapi;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @since 1.0
  */
+@ApiStatus.Internal
 public enum TextFont {
 
     /**

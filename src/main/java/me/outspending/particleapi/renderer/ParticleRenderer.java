@@ -1,11 +1,14 @@
 package me.outspending.particleapi.renderer;
 
 import me.outspending.particleapi.*;
+import me.outspending.particleapi.annotations.RequiresOptions;
+import me.outspending.particleapi.annotations.RequiresType;
+import me.outspending.particleapi.custom.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticleType;
 import org.bukkit.Location;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -57,6 +60,8 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param options
      * @param particle
      */
+    @RequiresType
+    @RequiresOptions
     public ParticleRenderer(@NotNull CustomParticleType type, @NotNull ParticleOptions options, @NotNull CustomParticle particle) {
         this(type, options, particle, null, null, null);
     }
@@ -69,6 +74,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param option
      * @param value
      */
+    @RequiresOptions
     public void editOption(@NotNull ParticleOption option, @NotNull Object value) {
         options.editOption(option, value);
     }
@@ -82,6 +88,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
+    @RequiresType
     public void render(@NotNull Location location) {
         renderType(location, type, particle, onRender, onRenderStart, onRenderFinish);
     }
@@ -92,6 +99,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @since 1.0
      * @return CompletableFuture
      */
+    @RequiresType
     public CompletableFuture<Void> renderAsync(@NotNull Location location) {
         return renderTypeAsync(location, type, particle, onRender, onRenderStart, onRenderFinish);
     }
@@ -105,6 +113,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
+    @RequiresType
     public void renderTimed(@NotNull Location location, @NotNull TimeUnit time, int delay) {
         renderTimed(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
     }
@@ -118,6 +127,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @see CustomParticleType
      * @see Renderer
      */
+    @RequiresType
     public void renderTimedAsync(@NotNull Location location, @NotNull TimeUnit time, int delay) {
         renderTimedAsync(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish);
     }
@@ -132,6 +142,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param location
      * @param rendererSet
      */
+    @RequiresType
     @ApiStatus.Experimental
     public void renderMultiple(@NotNull Location location, Set<ParticleRenderer> rendererSet) {
         for (ParticleRenderer renderer : rendererSet)
@@ -149,6 +160,7 @@ public non-sealed class ParticleRenderer extends Renderer {
      * @param rendererSet
      * @return CompletableFuture
      */
+    @RequiresType
     @ApiStatus.Experimental
     public void renderMultipleAsync(@NotNull Location location, Set<ParticleRenderer> rendererSet) {
         for (ParticleRenderer renderer : rendererSet)

@@ -1,6 +1,6 @@
 package me.outspending.particleapi.particles;
 
-import me.outspending.particleapi.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticle;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

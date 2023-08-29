@@ -1,7 +1,8 @@
 package me.outspending.particleapi;
 
+import me.outspending.particleapi.custom.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.renderer.ParticleRenderer;
-import me.outspending.particleapi.types.CircleParticleType;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.event.EventHandler;
@@ -20,17 +21,16 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        ParticleRenderer renderer = CustomParticleType.builder(ParticleType.TRIANGLE)
+        ParticleRenderer renderer = CustomParticleType.builder(ParticleType.WAVE)
                 .particleType(CustomParticle.dust(Color.RED, 1))
-                .editOption(ParticleOption.RADIUS, 5D)
-                .editOption(ParticleOption.DENSITY, 100)
-                .editOption(ParticleOption.HEIGHT, 5D)
-                .editOption(ParticleOption.ROTATION, 0D)
-                .editOption(ParticleOption.HOLLOW, false)
+                .editOption(ParticleOption.RADIUS, (short) 5)
+                .editOption(ParticleOption.DENSITY, (short) 250)
+                .editOption(ParticleOption.HEIGHT, 5L)
+                .editOption(ParticleOption.ROTATION_Y, (short) 65)
+                .editOption(ParticleOption.ROTATION_Z, (short) 65)
                 .build();
 
-        for (int i = 0; i < 25; i++)
-            renderer.render(e.getBlock().getLocation());
+        renderer.renderTimed(e.getBlock().getLocation(), TimeUnit.SECONDS, 5);
 
 //        new BukkitRunnable() {
 //

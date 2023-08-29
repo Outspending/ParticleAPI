@@ -1,9 +1,10 @@
 package me.outspending.particleapi.types;
 
-import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.annotations.RequiresOptions;
+import me.outspending.particleapi.annotations.RequiresType;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,35 +19,37 @@ import java.util.List;
  * <p>
  * Required Particle Options:
  * <ul>
- *     <li>{@code size} ({@link Double}) - The size of the cube</li>
- *     <li>{@code rotationX} ({@link Double}) - The rotation of the cube on the X axis</li>
- *     <li>{@code rotationY} ({@link Double}) - The rotation of the cube on the Y axis</li>
- *     <li>{@code rotationZ} ({@link Double}) - The rotation of the cube on the Z axis</li>
- *     <li>{@code density} ({@link Integer}) - The density of the cube</li>
+ *     <li>{@code size} ({@link Byte}) - The size of the cube</li>
+ *     <li>{@code rotationX} ({@link Short}) - The rotation of the cube on the X axis</li>
+ *     <li>{@code rotationY} ({@link Short}) - The rotation of the cube on the Y axis</li>
+ *     <li>{@code rotationZ} ({@link Short}) - The rotation of the cube on the Z axis</li>
+ *     <li>{@code density} ({@link Short}) - The density of the cube</li>
  * </ul>
  *
  * @see CustomParticleType
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
+@RequiresType
+@RequiresOptions
 public class CubeParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
-            .setOption(ParticleOption.SIZE, 1D)
-            .setOption(ParticleOption.ROTATION_X, 0D)
-            .setOption(ParticleOption.ROTATION_Y, 0D)
-            .setOption(ParticleOption.ROTATION_Z, 0D)
-            .setOption(ParticleOption.DENSITY, 1);
+            .setOption(ParticleOption.SIZE, (byte) 1)
+            .setOption(ParticleOption.ROTATION_X, (short) 0)
+            .setOption(ParticleOption.ROTATION_Y, (short) 0)
+            .setOption(ParticleOption.ROTATION_Z, (short) 0)
+            .setOption(ParticleOption.DENSITY, (short) 1);
 
     @NotNull
     @Override
-    public List<Vector> render(@NotNull Location startingLocation) {
+    public List<Vector> render() {
 
-        double size = options.getDoubleOption(ParticleOption.SIZE);
-        double rotationX = options.getDoubleOption(ParticleOption.ROTATION_X);
-        double rotationY = options.getDoubleOption(ParticleOption.ROTATION_Y);
-        double rotationZ = options.getDoubleOption(ParticleOption.ROTATION_Z);
-        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        byte size = options.getByteOption(ParticleOption.SIZE);
+        short rotationX = options.getShortOption(ParticleOption.ROTATION_X);
+        short rotationY = options.getShortOption(ParticleOption.ROTATION_Y);
+        short rotationZ = options.getShortOption(ParticleOption.ROTATION_Z);
+        short density = options.getShortOption(ParticleOption.DENSITY);
 
         List<Vector> offsets = new ArrayList<>();
         for (int i = 0; i < density; i++) {
@@ -63,11 +66,6 @@ public class CubeParticleType implements CustomParticleType {
     @Override
     public @NotNull ParticleOptions getOptions() {
         return options;
-    }
-
-    @Override
-    public @NotNull List<ParticleOption> getRequiredOptions() {
-        return options.getAllOptions();
     }
 
 }

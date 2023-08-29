@@ -1,6 +1,7 @@
 package me.outspending.particleapi;
 
-import me.outspending.particleapi.renderer.ParticleRenderer;
+import me.outspending.particleapi.custom.CustomParticleType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +17,8 @@ import java.util.List;
  * @since 1.0
  * @see CustomParticleType
  */
-public class ParticleOptions {
+@ApiStatus.Internal
+public final class ParticleOptions {
 
     private HashMap<ParticleOption, Object> options = new HashMap<>();
 
@@ -211,15 +213,4 @@ public class ParticleOptions {
         return new ArrayList<>(options.keySet());
     }
 
-    /**
-     * Gets the default options for a particle type.
-     *
-     * @since 1.0
-     * @param clazz
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public static ParticleOptions getDefaults(Class<? extends CustomParticleType> clazz) {
-        return clazz.cast(null).getOptions();
-    }
 }

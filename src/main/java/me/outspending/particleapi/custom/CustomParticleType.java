@@ -1,8 +1,10 @@
-package me.outspending.particleapi;
+package me.outspending.particleapi.custom;
 
 import com.google.common.base.Preconditions;
+import me.outspending.particleapi.ParticleOption;
+import me.outspending.particleapi.ParticleOptions;
+import me.outspending.particleapi.ParticleType;
 import me.outspending.particleapi.renderer.ParticleRenderer;
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,10 +41,9 @@ public interface CustomParticleType {
      * <p>
      * This uses vectors to get all points to render an {@link CustomParticleType},
      *
-     * @param startingLocation
      * @since 1.0
      */
-    @NotNull List<Vector> render(@NotNull Location startingLocation);
+    @NotNull List<Vector> render();
 
     /**
      * Gets the options for the particle type.
@@ -54,18 +55,6 @@ public interface CustomParticleType {
      * @return
      */
     @NotNull ParticleOptions getOptions();
-
-    /**
-     * Gets the required options for the particle type.
-     * <p>
-     * This is used to define the required options for the particle type.
-     * If one of the required options is not present, the particle effect
-     * will not render. This is used to prevent errors from occurring.
-     *
-     * @since 1.0
-     * @return
-     */
-    @NotNull List<ParticleOption> getRequiredOptions();
 
     /**
      * Represents a builder for a custom particle type.

@@ -1,4 +1,6 @@
-package me.outspending.particleapi;
+package me.outspending.particleapi.custom;
+
+import me.outspending.particleapi.ParticleOptions;
 
 /**
  * Represents a custom renderer.

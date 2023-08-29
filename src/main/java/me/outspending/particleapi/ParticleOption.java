@@ -1,5 +1,8 @@
 package me.outspending.particleapi;
 
+import org.jetbrains.annotations.ApiStatus;
+
+@ApiStatus.Internal
 public enum ParticleOption {
 
     /**
@@ -8,7 +11,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    RADIUS("radius", Double.class),
+    RADIUS("radius", Short.class),
 
     /**
      * Represents the size of a particle.
@@ -16,7 +19,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    SIZE("size", Double.class),
+    SIZE("size", Byte.class),
 
     /**
      * Represents the density of a particle.
@@ -24,7 +27,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.CircleParticleType
      * @since 1.0
      */
-    DENSITY("density", Integer.class),
+    DENSITY("density", Short.class),
 
     /**
      * Represents the height of a particle.
@@ -32,15 +35,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.HelixParticleType
      * @since 1.0
      */
-    HEIGHT("height", Double.class),
-
-    /**
-     * Represents the rotation of a particle.
-     *
-     * @see me.outspending.particleapi.types.HelixParticleType
-     * @since 1.0
-     */
-    ROTATION("rotation", Double.class),
+    HEIGHT("height", Long.class),
 
     /**
      * Represents whether or not a particle is hollow.
@@ -56,7 +51,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_X("rotationX", Double.class),
+    ROTATION_X("rotationX", Short.class),
 
     /**
      * Represents the rotation of a particle on the Y axis.
@@ -64,7 +59,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_Y("rotationY", Double.class),
+    ROTATION_Y("rotationY", Short.class),
 
     /**
      * Represents the rotation of a particle on the Z axis.
@@ -72,7 +67,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    ROTATION_Z("rotationZ", Double.class),
+    ROTATION_Z("rotationZ", Short.class),
 
     /**
      * Represents the image of a particle.
@@ -88,15 +83,15 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    WIDTH("width", Double.class),
+    WIDTH("width", Long.class),
 
     /**
-     * Represents the height of a particle.
+     * Represents the size of a particle.
      *
      * @see me.outspending.particleapi.types.ImageParticleType
      * @since 1.0
      */
-    PIXEL_SIZE("pixelSize", Integer.class),
+    PIXEL_SIZE("pixelSize", Byte.class),
 
     /**
      * Represents the display text of a particle.
@@ -120,7 +115,7 @@ public enum ParticleOption {
      * @see me.outspending.particleapi.types.TextParticleType
      * @since 1.0
      */
-    LENGTH("length", Integer.class);
+    LENGTH("length", Short.class);
 
     private final String optionName;
     private final Class<?> classType;

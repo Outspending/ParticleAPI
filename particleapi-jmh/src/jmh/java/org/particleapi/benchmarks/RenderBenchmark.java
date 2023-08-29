@@ -1,11 +1,10 @@
 package org.particleapi.benchmarks;
 
-import me.outspending.particleapi.CustomParticle;
-import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.custom.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.renderer.ParticleRenderer;
 import me.outspending.particleapi.types.CircleParticleType;
-import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.openjdk.jmh.annotations.*;
 

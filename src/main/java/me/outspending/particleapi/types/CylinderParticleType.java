@@ -1,15 +1,15 @@
 package me.outspending.particleapi.types;
 
-import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.annotations.RequiresOptions;
+import me.outspending.particleapi.annotations.RequiresType;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as a cylinder.
@@ -19,9 +19,9 @@ import java.util.concurrent.CompletableFuture;
  * <p>
  * Required Particle Options:
  * <ul>
- *     <li>{@code radius} ({@link Double}) - The radius of the cylinder</li>
- *     <li>{@code height} ({@link Double}) - The height of the cylinder</li>
- *     <li>{@code density} ({@link Integer}) - The density of the cylinder</li>
+ *     <li>{@code radius} ({@link Short}) - The radius of the cylinder</li>
+ *     <li>{@code height} ({@link Long}) - The height of the cylinder</li>
+ *     <li>{@code density} ({@link Short}) - The density of the cylinder</li>
  *     <li>{@code hollow} ({@link Boolean}) - Whether or not the cylinder is hollow</li>
  * </ul>
  *
@@ -29,21 +29,23 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
+@RequiresType
+@RequiresOptions
 public class CylinderParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
-            .setOption(ParticleOption.RADIUS, 1D)
-            .setOption(ParticleOption.HEIGHT, 1D)
-            .setOption(ParticleOption.DENSITY, 1)
+            .setOption(ParticleOption.RADIUS, (short) 1)
+            .setOption(ParticleOption.HEIGHT, 1L)
+            .setOption(ParticleOption.DENSITY, (short) 1)
             .setOption(ParticleOption.HOLLOW, true);
 
     @NotNull
     @Override
-    public List<Vector> render(@NotNull Location startingLocation) {
+    public List<Vector> render() {
 
-        double radius = options.getDoubleOption(ParticleOption.RADIUS);
-        double height = options.getDoubleOption(ParticleOption.HEIGHT);
-        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        short radius = options.getShortOption(ParticleOption.RADIUS);
+        long height = options.getLongOption(ParticleOption.HEIGHT);
+        short density = options.getShortOption(ParticleOption.DENSITY);
         boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         List<Vector> particleOffsets = new ArrayList<>();
@@ -62,22 +64,12 @@ public class CylinderParticleType implements CustomParticleType {
             }
         }
 
-        List<Vector> particleLocations = new ArrayList<>();
-        for (Vector offset : particleOffsets) {
-            particleLocations.add(startingLocation.clone().add(offset).toVector());
-        }
-
-        return particleLocations;
+        return particleOffsets;
     }
 
     @Override
     public @NotNull ParticleOptions getOptions() {
         return options;
-    }
-
-    @Override
-    public @NotNull List<ParticleOption> getRequiredOptions() {
-        return options.getAllOptions();
     }
 
 }

@@ -1,15 +1,15 @@
 package me.outspending.particleapi.types;
 
-import me.outspending.particleapi.CustomParticleType;
+import me.outspending.particleapi.annotations.RequiresOptions;
+import me.outspending.particleapi.annotations.RequiresType;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.ParticleOption;
 import me.outspending.particleapi.ParticleOptions;
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a particle type that renders as a sphere.
@@ -19,8 +19,8 @@ import java.util.concurrent.CompletableFuture;
  * <p>
  * Required Particle Options:
  * <ul>
- *     <li>{@code radius} ({@link Double}) - The radius of the sphere</li>
- *     <li>{@code density} ({@link Integer}) - The density of the sphere</li>
+ *     <li>{@code radius} ({@link Short}) - The radius of the sphere</li>
+ *     <li>{@code density} ({@link Short}) - The density of the sphere</li>
  *     <li>{@code hollow} ({@link Boolean}) - Whether or not the sphere is hollow</li>
  * </ul>
  *
@@ -28,19 +28,21 @@ import java.util.concurrent.CompletableFuture;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
+@RequiresType
+@RequiresOptions
 public class SphereParticleType implements CustomParticleType {
 
     private final ParticleOptions options = new ParticleOptions()
-            .setOption(ParticleOption.RADIUS, 1D)
-            .setOption(ParticleOption.DENSITY, 1)
+            .setOption(ParticleOption.RADIUS, (short) 1)
+            .setOption(ParticleOption.DENSITY, (short) 1)
             .setOption(ParticleOption.HOLLOW, true);
 
     @NotNull
     @Override
-    public List<Vector> render(@NotNull Location startingLocation) {
+    public List<Vector> render() {
 
-        double radius = options.getDoubleOption(ParticleOption.RADIUS);
-        int density = options.getIntegerOption(ParticleOption.DENSITY);
+        short radius = options.getShortOption(ParticleOption.RADIUS);
+        short density = options.getShortOption(ParticleOption.DENSITY);
         boolean hollow = options.getBooleanOption(ParticleOption.HOLLOW);
 
         int points = (int) (4 * Math.PI * radius * radius * density);
@@ -69,11 +71,6 @@ public class SphereParticleType implements CustomParticleType {
     @Override
     public @NotNull ParticleOptions getOptions() {
         return options;
-    }
-
-    @Override
-    public @NotNull List<ParticleOption> getRequiredOptions() {
-        return options.getAllOptions();
     }
 
 }

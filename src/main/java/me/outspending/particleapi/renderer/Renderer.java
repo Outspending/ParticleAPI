@@ -1,13 +1,11 @@
 package me.outspending.particleapi.renderer;
 
-import me.outspending.particleapi.*;
+import me.outspending.particleapi.annotations.RequiresOptions;
+import me.outspending.particleapi.annotations.RequiresType;
+import me.outspending.particleapi.custom.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.particles.ParticleHandler;
-import me.outspending.particleapi.particles.ParticleHandlerImpl;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -36,34 +34,14 @@ public sealed class Renderer permits ParticleRenderer {
     protected static final ParticleHandler handler = ParticleHandler.of();
 
     /**
-     * Gets all points from a particle type using {@link CustomParticleType#render(Location)}.
+     * Gets all points from a particle type using {@link CustomParticleType#render()}.
      *
      * @since 1.0
-     * @param startingLocation
      * @param type
      * @return List
      */
-    protected List<Vector> getAllPoints(@NotNull Location startingLocation, @NotNull CustomParticleType type) {
-        return type.render(startingLocation);
-    }
-
-    /**
-     * This checks if all required options are present in the {@link ParticleOptions}.
-     * <p>
-     * This is deprecated and will be removed in the future. Because each {@link CustomParticleType} has its own required options,
-     * and no longer needs to be looped though this method, this will automatically be done and doesn't need to be checked.
-     *
-     * @since 1.0
-     * @param type
-     * @return boolean
-     */
-    @Deprecated(forRemoval = true)
-    protected boolean hasAllRequiredOptions(@NotNull CustomParticleType type) {
-        ParticleOptions options = type.getOptions();
-        for (ParticleOption option : type.getRequiredOptions()) {
-            if (!options.hasOption(option)) return false;
-        }
-        return true;
+    protected List<Vector> getAllPoints(@NotNull CustomParticleType type) {
+        return type.render();
     }
 
     /**
@@ -76,9 +54,10 @@ public sealed class Renderer permits ParticleRenderer {
      * @param type
      * @param particle
      */
+    @RequiresType
     protected void renderType(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle,
                               Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
-        List<Vector> points = getAllPoints(location, type);
+        List<Vector> points = getAllPoints(type);
 
         for (Vector point : points) {
             Location loc = location.clone().add(point);
@@ -99,6 +78,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @param particle
      * @return CompletableFuture
      */
+    @RequiresType
     @ApiStatus.Experimental
     protected CompletableFuture<Void> renderTypeAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle,
                                                       Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
@@ -115,6 +95,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @param type
      * @param particle
      */
+    @RequiresType
     protected void renderTimed(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle, long delay, @NotNull TimeUnit time,
                                Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
         long start = System.currentTimeMillis();
@@ -141,6 +122,7 @@ public sealed class Renderer permits ParticleRenderer {
      * @param particle
      * @return CompletableFuture
      */
+    @RequiresType
     protected CompletableFuture<Void> renderTimedAsync(@NotNull Location location, @NotNull CustomParticleType type, @NotNull CustomParticle particle, long delay, @NotNull TimeUnit time,
                                                         Consumer<CustomParticle> onRender, Consumer<CustomParticle> onRenderStart, Consumer<CustomParticle> onRenderFinish) {
         return CompletableFuture.runAsync(() -> renderTimed(location, type, particle, delay, time, onRender, onRenderStart, onRenderFinish));

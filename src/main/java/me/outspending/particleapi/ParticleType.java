@@ -1,6 +1,8 @@
 package me.outspending.particleapi;
 
+import me.outspending.particleapi.custom.CustomParticleType;
 import me.outspending.particleapi.types.*;
+import org.jetbrains.annotations.ApiStatus;
 
 /**
  * Represents a particle type.
@@ -12,6 +14,7 @@ import me.outspending.particleapi.types.*;
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  * @since 1.0
  */
+@ApiStatus.Internal
 public enum ParticleType {
 
     /**

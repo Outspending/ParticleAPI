@@ -1,8 +1,9 @@
 package me.outspending.particleapi.particles;
 
-import me.outspending.particleapi.CustomParticle;
+import me.outspending.particleapi.custom.CustomParticle;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.function.Predicate;
  * @see me.outspending.particleapi.renderer.Renderer
  * @see me.outspending.particleapi.renderer.ParticleRenderer
  */
+@ApiStatus.Internal
 public interface ParticleHandler {
 
     /**
